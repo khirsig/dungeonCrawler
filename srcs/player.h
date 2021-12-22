@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:35:34 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 15:50:44 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/22 17:29:56 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ typedef struct s_player {
 	double	dirX;
 	double	dirY;
 	double	movementspeed;
+	double	max_health;
 	double	health;
+	double	max_stamina;
 	double	stamina;
 	int		rotate_left;
 	int		rotate_right;

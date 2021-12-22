@@ -21,6 +21,7 @@ SRC =	srcs/main.c										\
 		srcs/gameloop/loop_ingame.c						\
 		srcs/gameloop/ingame/ingame_draw.c				\
 		srcs/gameloop/ingame/ingame_keyhook.c			\
+		srcs/gameloop/ingame/ingame_interface.c			\
 		srcs/parser/parser.c							\
 		srcs/parser/parser_map.c						\
 		srcs/parser/parser_map_length.c					\

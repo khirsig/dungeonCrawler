@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:51:13 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 15:56:42 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/22 17:25:12 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	draw_ver_line(t_data *data, int x)
 	int	y;
 
 	y = 0;
-	// printf("%i < %i | x = %i\n", data->game.ray.drawStart, data->game.ray.drawEnd, x);
 	while (y < data->game.ray.drawStart)
 	{
 		DrawPixel(x, y, BLACK);
@@ -106,15 +105,12 @@ void	ingame_draw(t_data *data)
 		else
 			data->game.ray.perpWallDist = (data->game.ray.sideDistY - data->game.ray.deltaDistY);
 		data->game.ray.lineHeight = (int)(data->window.height / data->game.ray.perpWallDist);
-		// printf("%i = %i / %f\n", data->game.ray.lineHeight, data->window.height, data->game.ray.perpWallDist);
 		data->game.ray.drawStart = -data->game.ray.lineHeight / 2 + data->window.height / 2;
-		// printf("%i = -%i / 2 + %f / 2\n", data->game.ray.drawStart, data->game.ray.lineHeight, data->game.ray.perpWallDist);
 		if (data->game.ray.drawStart < 0)
 			data->game.ray.drawStart = 0;
 		data->game.ray.drawEnd = data->game.ray.lineHeight / 2 + data->window.height / 2;
 		if (data->game.ray.drawEnd >= data->window.height)
 			data->game.ray.drawEnd = data->window.height - 1;
-		// DrawLine(x,data->game.ray.drawStart, x + 1, data->game.ray.drawEnd, BLUE);
 		draw_ver_line(data, x);
 		x++;
 	}
