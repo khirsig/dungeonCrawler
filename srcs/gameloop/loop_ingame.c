@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 13:28:54 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 15:47:12 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/22 17:01:46 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ void	loop_ingame(t_data *data)
 	ClearBackground(BLACK);
 	ingame_keyhook(data);
 	ingame_draw(data);
+	ingame_interface(data);
 	EndDrawing();
 }

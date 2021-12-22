@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:52:17 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 13:20:45 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/22 23:06:13 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef struct s_ray {
 	double	deltaDistX;
 	double	deltaDistY;
 	double	perpWallDist;
+	double	wallX;
+	double	step;
+	double	texPos;
 	int		lineHeight;
 	int		drawStart;
 	int		drawEnd;
@@ -31,6 +34,9 @@ typedef struct s_ray {
 	int		mapY;
 	int		hit;
 	int		side;
+	int		texNum;
+	int		texX;
+	int		texY;
 }				t_ray;
 
 #endif

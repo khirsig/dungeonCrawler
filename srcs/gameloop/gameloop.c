@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:23:40 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 13:52:43 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/22 22:09:57 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	gameloop(t_data *data)
 {
 	while (!WindowShouldClose())
 	{
-		data->game.framesCounter++;
+		data->game.FPS = GetFPS();
 		if (IsKeyPressed(KEY_X))
 			data->game.state = MAINMENU;
 		if (IsKeyPressed(KEY_Y))

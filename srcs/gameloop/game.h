@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:40:57 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 12:54:41 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/22 22:55:54 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@
 
 typedef struct s_game {
 	t_ray	ray;
+	Color	**wall;
 	int		state;
-	int		framesCounter;
+	int		FPS;
 }				t_game;
 
 #endif
