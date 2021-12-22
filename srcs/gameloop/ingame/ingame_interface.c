@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:45:45 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 17:53:24 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/22 21:59:06 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,7 @@ static void	display_vitals(t_data *data)
 
 void	ingame_interface(t_data *data)
 {
+
+	DrawFPS(5, 5);
 	display_vitals(data);
 }

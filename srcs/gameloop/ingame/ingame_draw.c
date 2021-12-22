@@ -6,36 +6,37 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:51:13 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 17:25:12 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/22 23:44:48 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop_ingame.h"
 
-static void	draw_ver_line(t_data *data, int x)
+static void	draw_texture(t_data *data, int x)
 {
-	int	y;
+	int y;
+	Color temp;
 
-	y = 0;
-	while (y < data->game.ray.drawStart)
+	y = data->game.ray.drawStart;
+	while (y < data->game.ray.drawEnd)
 	{
-		DrawPixel(x, y, BLACK);
-		y++;
-	}
-	while (data->game.ray.drawStart <= data->game.ray.drawEnd)
-	{
-		if (data->game.ray.side == 1 && data->game.ray.hit == 1)
-			DrawPixel(x, data->game.ray.drawStart, MAROON);
-		else if (data->game.ray.side == 0 && data->game.ray.hit == 1)
-			DrawPixel(x, data->game.ray.drawStart, RED);
-		else
-			DrawPixel(x, data->game.ray.drawStart, LIME);
-		data->game.ray.drawStart++;
-	}
-	y = data->game.ray.drawEnd + 1;
-	while (y < data->window.width)
-	{
-		DrawPixel(x, y, BLACK);
+		data->game.ray.texY = (int)data->game.ray.texPos & (64 - 1);
+		data->game.ray.texPos += data->game.ray.step;
+		temp = data->game.wall[0][64 * data->game.ray.texY - 1 + data->game.ray.texX];
+		if (data->game.ray.perpWallDist > 5)
+		{
+			temp.r -= (data->game.ray.perpWallDist - 5) * 20;
+			if (temp.r < 0)
+				temp.r = 0;
+			temp.g-= (data->game.ray.perpWallDist - 5) * 20;
+			if (temp.g < 0)
+				temp.g = 0;
+			temp.b -= (data->game.ray.perpWallDist - 5) * 20;
+			if (temp.b < 0)
+				temp.b = 0;
+
+		}
+		DrawPixel(x, y, temp);
 		y++;
 	}
 }
@@ -111,7 +112,20 @@ void	ingame_draw(t_data *data)
 		data->game.ray.drawEnd = data->game.ray.lineHeight / 2 + data->window.height / 2;
 		if (data->game.ray.drawEnd >= data->window.height)
 			data->game.ray.drawEnd = data->window.height - 1;
-		draw_ver_line(data, x);
+		data->game.ray.texNum = data->map.grid[data->game.ray.mapY][data->game.ray.mapX] - 1;
+		if (data->game.ray.side == 0)
+			data->game.ray.wallX = data->player.posY + data->game.ray.perpWallDist * data->game.ray.dirY;
+		else
+			data->game.ray.wallX = data->player.posX + data->game.ray.perpWallDist * data->game.ray.dirX;
+		data->game.ray.wallX -= floor((data->game.ray.wallX));
+		data->game.ray.texX = (int)(data->game.ray.wallX * (double)(64));
+		if (data->game.ray.side == 0 && data->game.ray.dirX > 0)
+			data->game.ray.texX = 64 - data->game.ray.texX - 1;
+		if (data->game.ray.side == 1 && data->game.ray.dirY < 0)
+			data->game.ray.texX = 64 - data->game.ray.texX - 1;
+		data->game.ray.step = 1.0 * 64 / data->game.ray.lineHeight;
+		data->game.ray.texPos = (data->game.ray.drawStart - data->window.height / 2 + data->game.ray.lineHeight / 2) * data->game.ray.step;
+		draw_texture(data, x);
 		x++;
 	}
 }
