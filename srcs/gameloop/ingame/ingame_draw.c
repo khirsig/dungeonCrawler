@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:51:13 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 23:44:48 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/23 08:44:57 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ static void	draw_texture(t_data *data, int x)
 	{
 		data->game.ray.texY = (int)data->game.ray.texPos & (64 - 1);
 		data->game.ray.texPos += data->game.ray.step;
-		temp = data->game.wall[0][64 * data->game.ray.texY - 1 + data->game.ray.texX];
+		if (data->game.ray.hit == 1)
+			temp = data->game.wall[0][64 * data->game.ray.texY - 1 + data->game.ray.texX];
+		if (data->game.ray.hit == 2)
+			temp = data->game.wall[1][64 * data->game.ray.texY - 1 + data->game.ray.texX];
+		if (data->game.ray.hit == 3)
+			temp = data->game.wall[2][64 * data->game.ray.texY - 1 + data->game.ray.texX];
 		if (data->game.ray.perpWallDist > 5)
 		{
 			temp.r -= (data->game.ray.perpWallDist - 5) * 20;
@@ -34,7 +39,6 @@ static void	draw_texture(t_data *data, int x)
 			temp.b -= (data->game.ray.perpWallDist - 5) * 20;
 			if (temp.b < 0)
 				temp.b = 0;
-
 		}
 		DrawPixel(x, y, temp);
 		y++;
@@ -98,8 +102,10 @@ void	ingame_draw(t_data *data)
 			}
 			if (data->map.grid[data->game.ray.mapY][data->game.ray.mapX] == '1')
 				data->game.ray.hit = 1;
-			if (data->map.grid[data->game.ray.mapY][data->game.ray.mapX] == 'D')
+			if (data->map.grid[data->game.ray.mapY][data->game.ray.mapX] == '8')
 				data->game.ray.hit = 2;
+			if (data->map.grid[data->game.ray.mapY][data->game.ray.mapX] == '9')
+				data->game.ray.hit = 3;
 		}
 		if (data->game.ray.side == 0)
 			data->game.ray.perpWallDist = (data->game.ray.sideDistX - data->game.ray.deltaDistX);
@@ -120,10 +126,10 @@ void	ingame_draw(t_data *data)
 		data->game.ray.wallX -= floor((data->game.ray.wallX));
 		data->game.ray.texX = (int)(data->game.ray.wallX * (double)(64));
 		if (data->game.ray.side == 0 && data->game.ray.dirX > 0)
-			data->game.ray.texX = 64 - data->game.ray.texX - 1;
+			data->game.ray.texX = 63 - data->game.ray.texX - 1;
 		if (data->game.ray.side == 1 && data->game.ray.dirY < 0)
-			data->game.ray.texX = 64 - data->game.ray.texX - 1;
-		data->game.ray.step = 1.0 * 64 / data->game.ray.lineHeight;
+			data->game.ray.texX = 63 - data->game.ray.texX - 1;
+		data->game.ray.step = 1.0 * 63 / data->game.ray.lineHeight;
 		data->game.ray.texPos = (data->game.ray.drawStart - data->window.height / 2 + data->game.ray.lineHeight / 2) * data->game.ray.step;
 		draw_texture(data, x);
 		x++;

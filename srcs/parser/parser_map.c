@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 10:57:05 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/22 16:09:53 by khirsig          ###   ########.fr       */
+/*   Updated: 2021/12/23 08:02:01 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,15 @@ static int	finalize_map(t_data *data, char **temp)
 				break ;
 			if (check_char(temp[y_index][x_index]) == 0)
 				return (0);
-			data->map.grid[y_index][x_index] = temp[y_index][x_index];
+			int rnd = GetRandomValue(1, 100);
+			if ( temp[y_index][x_index] == '1' && rnd >= 0 && rnd < 70)
+				data->map.grid[y_index][x_index] = temp[y_index][x_index];
+			else if (temp[y_index][x_index] == '1' && rnd >= 70 && rnd < 90)
+				data->map.grid[y_index][x_index] = '8';
+			else if (temp[y_index][x_index] == '1')
+				data->map.grid[y_index][x_index] = '9';
+			else
+				data->map.grid[y_index][x_index] = temp[y_index][x_index];
 			x_index++;
 		}
 		while (x_index < data->map.width)
