@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:35:34 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/18 21:54:18 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/24 09:30:56 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ typedef struct s_player {
 	Camera	camera;
 	double	posX;
 	double	posY;
+	double	posZ;
 	double	planeX;
 	double	planeY;
+	double	planeZ;
 	double	dirX;
 	double	dirY;
+	double	dirZ;
 	double	movementspeed;
 	double	max_health;
 	double	health;

@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/24 01:00:15 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/24 17:39:45 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ static void	ingame_player_movement(t_data *data)
 	}
 	if (IsKeyDown(KEY_D))
 	{
-		data->player.posX += data->player.planeX * data->player.movementspeed;
-		data->player.posY += data->player.planeY * data->player.movementspeed;
-		data->player.dirX += data->player.planeX * data->player.movementspeed;
-		data->player.dirY += data->player.planeY * data->player.movementspeed;
+		data->player.posX += data->player.planeY * data->player.movementspeed;
+		data->player.posY -= data->player.planeX * data->player.movementspeed;
+		data->player.dirX += data->player.planeY * data->player.movementspeed;
+		data->player.dirY -= data->player.planeX * data->player.movementspeed;
 	}
 	if (IsKeyDown(KEY_A))
 	{
-		data->player.posX -= data->player.planeX * data->player.movementspeed;
-		data->player.posY -= data->player.planeY * data->player.movementspeed;
-		data->player.dirX -= data->player.planeX * data->player.movementspeed;
-		data->player.dirY -= data->player.planeY * data->player.movementspeed;
+		data->player.posX -= data->player.planeY * data->player.movementspeed;
+		data->player.posY += data->player.planeX * data->player.movementspeed;
+		data->player.dirX -= data->player.planeY * data->player.movementspeed;
+		data->player.dirY += data->player.planeX * data->player.movementspeed;
 	}
 }
 
@@ -79,7 +79,6 @@ static void	ingame_player_rotation(t_data *data)
 {
 	double temp;
 
-	printf("Plane: [%f] [%f]\n", data->player.planeX, data->player.planeY);
 	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
 	{
 		temp = data->player.planeX;
@@ -96,6 +95,22 @@ static void	ingame_player_rotation(t_data *data)
 		data->player.dirX = data->player.posX + data->player.planeX;
 		data->player.dirY = data->player.posY + data->player.planeY;
 	}
+	// if (IsKeyDown(KEY_UP) && !IsKeyDown(KEY_DOWN))
+	// {
+	// 	temp = data->player.planeZ;
+	// 	data->player.planeZ = data->player.planeZ * cos(0.05) - data->player.planeY * sin(0.05);
+	// 	data->player.planeY = temp * sin(0.05) + data->player.planeY * cos(0.05);
+	// 	data->player.dirZ = data->player.posZ + data->player.planeZ;
+	// 	data->player.dirY = data->player.posY + data->player.planeY;
+	// }
+	// if (IsKeyDown(KEY_DOWN) && !IsKeyDown(KEY_UP))
+	// {
+	// 	temp = data->player.planeZ;
+	// 	data->player.planeZ = data->player.planeZ * cos(-0.05) - data->player.planeY * sin(-0.05);
+	// 	data->player.planeY = temp * sin(-0.05) + data->player.planeY * cos(-0.05);
+	// 	data->player.dirZ = data->player.posZ + data->player.planeZ;
+	// 	data->player.dirY = data->player.posY + data->player.planeY;
+	// }
 }
 void	ingame_keyhook(t_data *data)
 {
