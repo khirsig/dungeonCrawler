@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/24 17:39:45 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/24 18:42:51 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,27 @@
 
 static void	ingame_player_movement_sprint(t_data *data)
 {
-	int	is_sprinting;
-
-	is_sprinting = 0;
-	if (IsKeyDown(KEY_LEFT_SHIFT))
-		is_sprinting = 1;
-	if (data->player.stamina < 0)
+	if (IsKeyPressed(KEY_LEFT_SHIFT))
 	{
-		is_sprinting = 0;
-		data->player.stamina = 0.0000;
+		data->player.is_sprinting = 1;
+		data->player.movementspeed = 0.14;
 	}
-	if (data->player.stamina > 0.5 && is_sprinting == 1)
+	if (IsKeyReleased(KEY_LEFT_SHIFT))
 	{
-		data->player.movementspeed = 0.12;
-		data->player.stamina -= 0.5;
-	}
-	else if (data->player.stamina < data->player.max_stamina)
-	{
+		data->player.is_sprinting = 0;
 		data->player.movementspeed = 0.08;
-		data->player.stamina += 0.2;
 	}
-	else
+	if (data->player.is_sprinting == 0 && data->player.stamina < data->player.max_stamina)
+		data->player.stamina += 0.20;
+	if (data->player.stamina > data->player.max_stamina)
 		data->player.stamina = data->player.max_stamina;
+	if (data->player.is_sprinting == 1 && data->player.stamina > 0.99)
+		data->player.stamina -= 0.50;
+	if (data->player.is_sprinting == 1 && data->player.stamina <= 0.99)
+	{
+		data->player.is_sprinting = 0;
+		data->player.movementspeed = 0.08;
+	}
 }
 
 static void	ingame_player_movement(t_data *data)
