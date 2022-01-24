@@ -5,7 +5,6 @@ NAME = dungeon
 LIBPATH = ./libft/libft.a
 
 LFLAGS = `pkg-config --libs --cflags raylib`
-CFLAGS = -Wall -Werror -Wextra
 
 OBJDIR = ./objs/
 OBJECTS = $(OBJDIR)/*.o
@@ -31,7 +30,7 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@make --directory=./libft
-	@$(CC) $(OBJECTS) $(LFLAGS) $(CFLAGS) -o $(NAME) $(LIBPATH)
+	@$(CC) $(OBJECTS) $(LFLAGS) -o $(NAME) $(LIBPATH)
 
 $(OBJECTS): $(SRC)
 	@$(CC) -c $(CFLAGS) $(SRC)
