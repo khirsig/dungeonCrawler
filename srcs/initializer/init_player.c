@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:39:41 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/24 18:43:00 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/25 14:39:29 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void set_start_point(t_data *data)
 
 				data->player.posX = x * 10;
 				data->player.posY = y * 10;
-				data->player.posZ = -1.3f;
-				data->player.dirZ = -1.3f;
+				data->player.posZ = 1.3f;
+				data->player.dirZ = 1.3f;
 				data->player.planeZ = 1.0f;
 				data->player.planeX = 0.0f;
 				data->player.planeY = 0.0f;
@@ -67,6 +67,6 @@ void	init_player(t_data *data)
 	// data->player.planeY = -1.0f;
 	data->player.camera.position = (Vector3){ data->player.posX, data->player.posZ, data->player.posY };
 	data->player.camera.target = (Vector3){ data->player.dirX, data->player.dirZ, data->player.dirY };
-	data->player.camera.up = (Vector3){ 0.0f, -1.0f, 0.0f };
+	data->player.camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
 	data->player.camera.fovy = 60.0f;
 }
