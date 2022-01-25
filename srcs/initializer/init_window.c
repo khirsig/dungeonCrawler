@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:16:03 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/25 14:57:48 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:07:30 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,12 @@ static Texture	load_texture(char *path)
 
 void	init_window(t_data *data)
 {
-	data->window.height = 800;
-	data->window.width = 1400;
-	InitWindow(data->window.width, data->window.height, "The Elder Scrolls: Dungeon");
-	data->game.wall = malloc(sizeof(Texture *) * 3);
+	data->window.height = SCREEN_HEIGHT;
+	data->window.width = SCREEN_WIDTH;
+	InitWindow(data->window.width, data->window.height, SCREEN_TITLE);
+	data->game.wall = malloc(sizeof(Texture *) * 4);
 	data->game.wall[0] = load_texture("resources/textures/crypt00.png");
 	data->game.wall[1] = load_texture("resources/textures/crypt01.png");
 	data->game.wall[2] = load_texture("resources/textures/crypt02.png");
+	data->game.test = LoadImage("resources/textures/crypt02.png");
 }

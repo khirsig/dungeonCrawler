@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 10:57:05 by khirsig           #+#    #+#             */
-/*   Updated: 2021/12/23 08:02:01 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/25 21:16:08 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static int	check_char(char c)
 {
-	if (c == '1' || c == '0' || c == ' ' || c == '\0' || c == 'B' || c == 'D'
-		|| c == 'N' || c == 'S' || c == 'W' || c == 'E')
+	if (c == '1' || c == '0' || c == ' ' || c == '\0' || c == 'B' || c == '['
+		|| c == 'N' || c == 'S' || c == 'W' || c == 'E' || c == ']' || c == '-'
+		|| c == '_')
 		return (1);
 	else
 		return (0);
@@ -50,7 +51,18 @@ static int	finalize_map(t_data *data, char **temp)
 			else if (temp[y_index][x_index] == '1')
 				data->map.grid[y_index][x_index] = '9';
 			else
+			{
+				if (temp[y_index][x_index] == '-' || temp[y_index][x_index] == '_' || temp[y_index][x_index] == '[' || temp[y_index][x_index] == ']')
+				{
+					data->map.door_count++;
+					data->map.door = realloc(data->map.door, data->map.door_count * sizeof(t_door));
+					data->map.door[data->map.door_count - 1].x = x_index;
+					data->map.door[data->map.door_count - 1].y = y_index;
+					data->map.door[data->map.door_count - 1].z = 0.0f;
+					data->map.door[data->map.door_count - 1].state = CLOSING;
+				}
 				data->map.grid[y_index][x_index] = temp[y_index][x_index];
+			}
 			x_index++;
 		}
 		while (x_index < data->map.width)
@@ -92,6 +104,5 @@ void	parser_map(t_data *data, char *file)
 	}
 	if (finalize_map(data, temp) == 0)
 		ft_putstr_fd("Error\n", 2);
-	// free(temp);
 	parser_map_error(data, data->map.grid);
 }

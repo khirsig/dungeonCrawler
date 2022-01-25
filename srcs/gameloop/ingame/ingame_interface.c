@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:45:45 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/25 15:00:20 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/26 00:01:19 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 
 static char	display_minimap_pos(t_data *data, int x, int y, double divider, double size)
 {
+	char pos;
 	int x_temp;
 	int y_temp;
+	int	temp1;
+	int	temp2;
+	int	door_temp;
 	int	div;
 
 	div = divider / 2;
-	x_temp = data->player.posX / 10 + ((x - (int)(data->window.width - size / 2 - div)) / divider);
+	x_temp = data->player.posX / 10 + ((x - (int)(data->window.width - size / 2 - div - 1)) / divider);
 	y_temp = data->player.posY / 10 + ((y - (int)(size / 2 - div)) / divider);
 	if (x_temp >= 0 && y_temp >= 0 && x_temp < data->map.width && y_temp < data->map.height)
-		return (data->map.grid[y_temp][x_temp]);
+	{
+		pos = data->map.grid[y_temp][x_temp];
+		return (pos);
+	}
 	else
 		return ('0');
 }
@@ -56,7 +63,9 @@ static void display_minimap(t_data *data)
 		{
 			pos = display_minimap_pos(data, x_start, y_start, divider, size);
 			if (pos == '1' || pos == '8' || pos == '9')
-				DrawPixel(x_start, y_start, GRAY);
+				DrawPixel(x_start, y_start, DARKGRAY);
+			if (pos == '-' || pos == '_' || pos == '[' || pos == ']')
+				DrawPixel(x_start, y_start, PURPLE);
 			x_start++;
 		}
 		y_start++;
@@ -69,13 +78,13 @@ static void display_minimap(t_data *data)
 	index = -0.7853;
 	while (index < 0.7853)
 	{
-	temp = data->player.planeX;
-	x_rotate = data->player.planeX * cos(index) - data->player.planeY * sin(index);
-	y_rotate = temp * sin(index) + data->player.planeY * cos(index);
-	DrawLine(data->window.width - size / 2, size / 2, (data->window.width - size / 2)
-			+ x_rotate * (divider * 1.5f), (size / 2)
-			+ y_rotate * (divider * 1.5f), (Color){ 253, 253, 253, 50 });
-	index += 0.01;
+		temp = data->player.planeX;
+		x_rotate = data->player.planeX * cos(index) - data->player.planeY * sin(index);
+		y_rotate = temp * sin(index) + data->player.planeY * cos(index);
+		DrawLine(data->window.width - size / 2, size / 2, (data->window.width - size / 2)
+				+ x_rotate * (divider * 1.5f), (size / 2)
+				+ y_rotate * (divider * 1.5f), (Color){ 253, 253, 253, 50 });
+		index += 0.01;
 	}
 	DrawCircle(data->window.width - size / 2, size / 2, divider / 2 - divider / 5, BLUE);
 }

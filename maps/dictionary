@@ -1,0 +1,10 @@
+0 = Floor
+1 = Wall
+N = Spawn Player North
+S = Spawn Player South
+W = Spawn Player West
+E = Spawn Player East
+[ = Door facing West
+] = Door facing East
+_ = Door facing South
+- = Door facing North

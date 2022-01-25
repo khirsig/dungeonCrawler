@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:40:57 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/18 22:47:53 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/25 20:06:00 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@
 # define INVENTORY 3
 # define MAP 4
 
-# include "ingame/ray.h"
 
 typedef struct s_game {
-	t_ray	ray;
 	Texture	*wall;
+	Image	test;
 	int		state;
 	int		FPS;
 }				t_game;

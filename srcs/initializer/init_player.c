@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:39:41 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/25 14:39:29 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/25 18:05:52 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,8 @@ void	init_player(t_data *data)
 	data->player.health = data->player.max_health;
 	data->player.max_stamina = 100.00000;
 	data->player.stamina = data->player.max_stamina;
-	// data->player.posX = 4.0f;
-	// data->player.posY = 4.0f;
-	// data->player.posZ = -1.3f;
-	// data->player.planeX = 1.0f;
-	// data->player.planeY = -1.0f;
 	data->player.camera.position = (Vector3){ data->player.posX, data->player.posZ, data->player.posY };
 	data->player.camera.target = (Vector3){ data->player.dirX, data->player.dirZ, data->player.dirY };
 	data->player.camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
-	data->player.camera.fovy = 60.0f;
+	data->player.camera.fovy = SCREEN_FOV;
 }

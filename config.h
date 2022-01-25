@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initializer.c                                      :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 23:15:29 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/25 21:15:46 by khirsig          ###   ########.fr       */
+/*   Created: 2022/01/25 17:42:21 by khirsig           #+#    #+#             */
+/*   Updated: 2022/01/25 18:02:31 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "initializer.h"
+#ifndef DC_CONFIG_H
+# define DC_CONFIG_H
 
-void	initializer(t_data *data)
-{
-	init_window(data);
-	init_gameloop(data);
-	init_player(data);
-}
+# define SCREEN_WIDTH	1400
+# define SCREEN_HEIGHT	800
+# define SCREEN_FPS		120
+# define SCREEN_FOV		60.0f
+# define SCREEN_TITLE	"dungeonCrawler"
+
+#endif
