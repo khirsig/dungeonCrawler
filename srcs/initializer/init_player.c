@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:39:41 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/25 18:05:52 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/26 18:59:54 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void set_start_point(t_data *data)
 				|| data->map.grid[y][x] == 'E' || data->map.grid[y][x] == 'W')
 			{
 
-				data->player.posX = x * 10;
-				data->player.posY = y * 10;
+				data->player.posX = x * 10 + 5;
+				data->player.posY = y * 10 + 5;
 				data->player.posZ = 1.3f;
 				data->player.dirZ = 1.3f;
 				data->player.planeZ = 1.0f;

@@ -6,30 +6,78 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:45:45 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/26 00:01:19 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/27 00:35:11 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop_ingame.h"
 
+static void	display_minimap_door(t_data *data, double x, double y, double divider, char pos)
+{
+	double	x_og;
+	double	y_og;
+	double	x_end;
+	double	y_end;
+	double	x_length;
+	double	y_length;
+
+	x_og = x;
+	y_og = y;
+	y_end = y + divider;
+	y_length = y_end - y;
+	x_length = (x + divider) - x;
+	while (y <= y_end)
+	{
+		x = x_og;
+		x_end = x + divider;
+		while (x <= x_end)
+		{
+			if ((pos == '_'  && y > y_og + (y_length / 5 * 4)) || (pos == '-' && y < y_og + (y_length / 5 * 1))
+				|| (pos == ']' && x > x_og + (x_length / 5 * 4)) || (pos == '[' && x < x_og + (x_length / 5 * 1)))
+				DrawPixel(x, y, PURPLE);
+			x++;
+		}
+		y++;
+	}
+}
+
+static void	display_minimap_wall(t_data *data, double x, double y, double divider)
+{
+	double	x_og;
+	double	x_end;
+	double	y_end;
+
+	x_og = x;
+	y_end = y + divider;
+	// printf("x = [%i] y = [%i] y_end = [%i]\n", x, y, y_end);
+	while (y <= y_end)
+	{
+		x = x_og;
+		x_end = x + divider;
+		while (x <= x_end)
+		{
+			DrawPixel((int)x, (int)y, DARKGRAY);
+			x++;
+		}
+		y++;
+	}
+}
+
 static char	display_minimap_pos(t_data *data, int x, int y, double divider, double size)
 {
 	char pos;
-	int x_temp;
-	int y_temp;
+	double x_temp;
+	double y_temp;
 	int	temp1;
 	int	temp2;
 	int	door_temp;
 	int	div;
 
 	div = divider / 2;
-	x_temp = data->player.posX / 10 + ((x - (int)(data->window.width - size / 2 - div - 1)) / divider);
+	x_temp = data->player.posX / 10 + ((x - (int)(data->window.width - size / 2 - div)) / divider);
 	y_temp = data->player.posY / 10 + ((y - (int)(size / 2 - div)) / divider);
 	if (x_temp >= 0 && y_temp >= 0 && x_temp < data->map.width && y_temp < data->map.height)
-	{
-		pos = data->map.grid[y_temp][x_temp];
-		return (pos);
-	}
+		return (data->map.grid[(int)y_temp][(int)x_temp]);
 	else
 		return ('0');
 }
@@ -38,37 +86,42 @@ static void display_minimap(t_data *data)
 {
 	double x_start;
 	double x_calc;
+	double x_rest;
 	double x_end;
 	double y_start;
 	double y_calc;
+	double y_rest;
 	double y_end;
 	double size;
 	double divider;
 	char	pos;
 
 	if (data->window.height > data->window.width)
-		size = (int)(data->window.width / 3);
+		size = (data->window.width / 3);
 	else if (data->window.height != data->window.width)
-		size = (int)(data->window.height / 3);
+		size = (data->window.height / 3);
 	else
-		size = (int)(data->window.height / 4);
-	divider = (int)(size / 10);
+		size = (data->window.height / 4);
+	divider = (int)(size / 8);
 	x_end = data->window.width;
 	y_end = size;
-	y_start = 0;
+	y_start = (divider / 2);
 	while (y_start <= y_end)
 	{
-		x_start = data->window.width - size;
+		x_start = data->window.width - size + (divider / 2);
 		while (x_start <= x_end)
 		{
 			pos = display_minimap_pos(data, x_start, y_start, divider, size);
+			x_rest = ((data->player.posX / 10 - (int)(data->player.posX / 10)) * (divider / 2));
+			y_rest = ((data->player.posY / 10 - (int)(data->player.posY / 10)) * (divider / 2));
+			// printf("Rest: [%f] - [%d] * [%f] = [%f][%f] Size: [%f] Div: [%f] PPos: [%f][%f]\n",data->player.posY / 10, (int)(data->player.posY / 10), divider, x_rest, y_rest, size, divider, data->player.posX, data->player.posY);
 			if (pos == '1' || pos == '8' || pos == '9')
-				DrawPixel(x_start, y_start, DARKGRAY);
+				display_minimap_wall(data, x_start - x_rest, y_start - y_rest, divider);
 			if (pos == '-' || pos == '_' || pos == '[' || pos == ']')
-				DrawPixel(x_start, y_start, PURPLE);
-			x_start++;
+				display_minimap_door(data, x_start - x_rest, y_start - y_rest, divider, pos);
+			x_start += divider;
 		}
-		y_start++;
+		y_start += divider;
 	}
 	double x_rotate;
 	double y_rotate;
