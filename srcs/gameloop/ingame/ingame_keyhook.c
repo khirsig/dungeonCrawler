@@ -6,11 +6,62 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/26 00:00:38 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/27 00:33:14 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop_ingame.h"
+
+static int	get_door(t_data *data, int x, int y)
+{
+	int	index;
+
+	index = 0;
+	while (index < data->map.door_count)
+	{
+		if (data->map.door[index].x == x && data->map.door[index].y == y)
+			return (index);
+		index++;
+	}
+	return (-1);
+}
+
+static void	rotate_door(t_data *data)
+{
+	int index;
+
+	index = 0;
+	while (index < data->map.door_count)
+	{
+		if (data->map.door[index].state == OPENING && data->map.door[index].z < 10.0f)
+			data->map.door[index].z += 0.10f;
+		if (data->map.door[index].state == CLOSING && data->map.door[index].z > 0.0f)
+			data->map.door[index].z -= 0.10f;
+		if (data->map.door[index].z > 10.0f)
+			data->map.door[index].z = 10.0f;
+		if (data->map.door[index].z < 0.0f)
+			data->map.door[index].z = 0.0f;
+		index++;
+	}
+}
+
+static void	ingame_player_actions(t_data *data)
+{
+	int	door_id;
+
+	if (IsKeyPressed(KEY_F))
+	{
+		door_id = get_door(data, (int)(data->player.posX / 10 + data->player.planeX), (int)(data->player.posY / 10 + data->player.planeY));
+		if (door_id != -1)
+		{
+			if (data->map.door[door_id].state == OPENING)
+				data->map.door[door_id].state = CLOSING;
+			else
+				data->map.door[door_id].state = OPENING;
+		}
+	}
+	rotate_door(data);
+}
 
 static void	ingame_player_movement_sprint(t_data *data)
 {
@@ -95,8 +146,10 @@ static void	ingame_player_rotation(t_data *data)
 		data->player.dirY = data->player.posY + data->player.planeY;
 	}
 }
+
 void	ingame_keyhook(t_data *data)
 {
 	ingame_player_movement(data);
 	ingame_player_rotation(data);
+	ingame_player_actions(data);
 }

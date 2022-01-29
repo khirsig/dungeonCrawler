@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:10:13 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/26 00:00:27 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/26 09:30:22 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ingame_draw(t_data *data)
 	double	dist_y;
 	int	min;
 
-	div = 255 / 100 * 25;
+	div = 255 / 100 * 20;
 	y = 0;
 	while (y < data->map.height)
 	{
