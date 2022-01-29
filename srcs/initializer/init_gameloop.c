@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:27:06 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/25 17:46:01 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/27 18:45:55 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 void	init_gameloop(t_data *data)
 {
 	data->game.state = MAINMENU;
+	data->game.debugmode = 0;
 	SetTargetFPS(SCREEN_FPS);
 }
