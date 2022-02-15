@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 10:57:05 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/25 21:16:08 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/31 01:41:50 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_char(char c)
 {
 	if (c == '1' || c == '0' || c == ' ' || c == '\0' || c == 'B' || c == '['
 		|| c == 'N' || c == 'S' || c == 'W' || c == 'E' || c == ']' || c == '-'
-		|| c == '_')
+		|| c == '_' || c == 'n')
 		return (1);
 	else
 		return (0);
@@ -60,6 +60,16 @@ static int	finalize_map(t_data *data, char **temp)
 					data->map.door[data->map.door_count - 1].y = y_index;
 					data->map.door[data->map.door_count - 1].z = 0.0f;
 					data->map.door[data->map.door_count - 1].state = CLOSING;
+				}
+				if (temp[y_index][x_index] == 'n')
+				{
+					data->game.npc_count++;
+					data->npc = realloc(data->npc, data->game.npc_count * sizeof(t_npc));
+					data->npc[data->game.npc_count - 1].cycle = 0.00f;
+					data->npc[data->game.npc_count - 1].state = IDLE;
+					data->npc[data->game.npc_count - 1].id = data->game.npc_count - 1;
+					data->npc[data->game.npc_count - 1].pos.x = x_index * 10 - 2.50f;
+					data->npc[data->game.npc_count - 1].pos.y = y_index * 10 - 2.50f;
 				}
 				data->map.grid[y_index][x_index] = temp[y_index][x_index];
 			}

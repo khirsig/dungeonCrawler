@@ -6,11 +6,43 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:10:13 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/26 09:30:22 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/15 13:39:44 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop_ingame.h"
+
+static void	ingame_draw_npc(t_data *data, double div)
+{
+	Color	fade;
+	int		index;
+	int		min;
+	double	dist_x;
+	double	dist_y;
+
+	index = 0;
+	while (index < data->game.npc_count)
+	{
+			dist_x = data->player.posX / 10 - data->npc[index].pos.x / 10;
+			if (dist_x < 0)
+				dist_x *= -1;
+			dist_y = data->player.posY / 10 - data->npc[index].pos.y / 10;
+			if (dist_y < 0)
+				dist_y *= -1;
+			if (dist_y > dist_x)
+				min = div * dist_y;
+			else
+				min = div * dist_x;
+			if (min > 255)
+				min = 255;
+			if (min < 255)
+			{
+				fade = (Color){ 255 - min, 255 - min, 255 - min, 255 };
+				DrawBillboard(data->player.camera, data->npc[index].texture[(int)data->npc[index].cycle], (Vector3) { data->npc[index].pos.x, data->npc[index].pos.z, data->npc[index].pos.y }, data->npc[index].size, fade);
+			}
+			index++;
+	}
+}
 
 static void	ingame_draw_door(t_data *data, double div)
 {
@@ -23,27 +55,30 @@ static void	ingame_draw_door(t_data *data, double div)
 	index = 0;
 	while (index < data->map.door_count)
 	{
-			dist_x = data->player.posX / 10 - data->map.door[index].x;
-			if (dist_x < 0)
-				dist_x *= -1;
-			dist_y = data->player.posY / 10 - data->map.door[index].y;
-			if (dist_y < 0)
-				dist_y *= -1;
-			if (dist_y > dist_x)
-				min = div * dist_y;
-			else
-				min = div * dist_x;
-			if (min > 255)
-				min = 255;
+		dist_x = data->player.posX / 10 - data->map.door[index].x;
+		if (dist_x < 0)
+			dist_x *= -1;
+		dist_y = data->player.posY / 10 - data->map.door[index].y;
+		if (dist_y < 0)
+			dist_y *= -1;
+		if (dist_y > dist_x)
+			min = div * dist_y;
+		else
+			min = div * dist_x;
+		if (min > 255)
+			min = 255;
+		if (min < 255)
+		{
 			fade = (Color){ 255 - min, 255 - min, 255 - min, 255 };
-		if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == '-')
-			DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10, data->map.door[index].z, data->map.door[index].y * 10 - 5 }, 10.0f, 10.0f, 0.0f, fade);
-		if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == '_')
-			DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10, data->map.door[index].z, data->map.door[index].y * 10 + 5 }, 10.0f, 10.0f, 0.0f, fade);
-		if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == ']')
-			DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10 + 5, data->map.door[index].z, data->map.door[index].y * 10 }, 0.0f, 10.0f, 10.0f, fade);
-		if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == '[')
-			DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10 - 5, data->map.door[index].z, data->map.door[index].y * 10 }, 0.0f, 10.0f, 10.0f, fade);
+			if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == '-')
+				DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10, data->map.door[index].z, data->map.door[index].y * 10 - 5 }, 10.0f, 10.0f, 0.0f, fade);
+			if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == '_')
+				DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10, data->map.door[index].z, data->map.door[index].y * 10 + 5 }, 10.0f, 10.0f, 0.0f, fade);
+			if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == ']')
+				DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10 + 5, data->map.door[index].z, data->map.door[index].y * 10 }, 0.0f, 10.0f, 10.0f, fade);
+			if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == '[')
+				DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10 - 5, data->map.door[index].z, data->map.door[index].y * 10 }, 0.0f, 10.0f, 10.0f, fade);
+		}
 		index++;
 	}
 }
@@ -95,4 +130,5 @@ void	ingame_draw(t_data *data)
 		y++;
 	}
 	ingame_draw_door(data, div);
+	ingame_draw_npc(data, div);
 }

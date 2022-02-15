@@ -3,8 +3,7 @@ CC = gcc
 NAME = dungeon
 
 LIBPATH = ./libft/libft.a
-# CFLAGS =  -I "/opt/homebrew/Cellar/raylib/3.7.0/include/"
-LFLAGS =  `pkg-config --libs --cflags raylib`
+LFLAGS =  -lraylib
 
 OBJDIR = ./objs/
 OBJECTS = $(OBJDIR)/*.o
@@ -13,6 +12,7 @@ SRC =	srcs/main.c										\
 		srcs/initializer/initializer.c					\
 		srcs/initializer/init_window.c					\
 		srcs/initializer/init_player.c					\
+		srcs/initializer/init_npc.c						\
 		srcs/initializer/init_gameloop.c				\
 		srcs/gameloop/gameloop.c						\
 		srcs/gameloop/loop_mainmenu.c					\

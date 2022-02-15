@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:35:34 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/24 18:38:58 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/29 15:04:14 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_player {
 	int		rotate_left;
 	int		rotate_right;
 	int		is_sprinting;
+	int		is_jumping;
 }				t_player;
 
 #endif

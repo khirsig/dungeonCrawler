@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:45:45 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/29 14:28:29 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/01/31 01:49:27 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ static char	display_minimap_pos(t_data *data, double x, double y, double divider
 	else
 		return ('0');
 }
+
+// static void	display_npc(t_data *data)
+// {
+// 	int	index;
+
+// 	index = 0;
+// 	while (index < data->game.npc_count)
+// 	{
+
+// 		index++;
+// 	}
+// }
 
 static int	get_door_id(t_data *data, int x, int y)
 {
@@ -63,7 +75,7 @@ static void	display_minimap_door(t_data *data, double x, double y, double divide
 		x_temp = data->player.posX / 10 + (((x - sub) - (data->window.width - size / 2 - div)) / divider);
 		sub++;
 	}
-	x_og = x - sub + 1;
+	x_og = x - sub + 2;
 	y_og = data->player.posY / 10 + ((y - (size / 2 - div)) / divider);
 	y_temp = y_og;
 	sub = 0;
@@ -72,15 +84,15 @@ static void	display_minimap_door(t_data *data, double x, double y, double divide
 		y_temp = data->player.posY / 10 + (((y - sub) - (size / 2 - div)) / divider);
 		sub++;
 	}
-	y_og = y - sub + 1;
+	y_og = y - sub + 2;
 	if ((pos == '_'  && y > y_og + (divider / 5 * 4)) || (pos == '-' && y < y_og + (divider / 5 * 1))
 		|| (pos == ']' && x > x_og + (divider / 5 * 4)) || (pos == '[' && x < x_og + (divider / 5 * 1)))
 		{
 			door_id = get_door_id(data, x_temp + 1, y_temp + 1);
 			if (door_id != -1 && data->map.door[door_id].state == OPENING)
 			{
-				if (((pos == '-' || pos == '_') && (x < x_og + (divider / 5 * 1) || x > x_og + (divider / 5 * 4)))
-					|| ((pos == '[' || pos == ']') && (y < y_og + (divider / 5 * 1) || y > y_og + (divider / 5 * 4))))
+				if (((pos == '-' || pos == '_') && (x <= x_og + (int)(divider / 5 * 1) || x > x_og + (int)(divider - (divider / 5 * 1))))
+					|| ((pos == '[' || pos == ']') && (y <= y_og + (int)(divider / 5 * 1) || y > y_og + (int)(divider - (divider / 5 * 1)))))
 					DrawPixel(x, y, PURPLE);
 			}
 			else
@@ -209,6 +221,11 @@ static void	ingame_interface_debug(t_data *data)
 	DrawText(temp, 90, 75, 5, WHITE);
 	sprintf(temp, "%.2lf", data->player.planeZ);
 	DrawText(temp, 140, 75, 5, WHITE);
+}
+
+static void	display_cursor(t_data *data)
+{
+	DisableCursor();
 }
 
 void	ingame_interface(t_data *data)
