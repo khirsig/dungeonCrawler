@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:10:13 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/15 13:39:44 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/16 14:50:36 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,34 @@ void	ingame_draw(t_data *data)
 {
 	Color fade;
 	int	x;
+	int	x_end;
 	int	y;
+	int	y_end;
 	double	div;
 	double	dist_x;
 	double	dist_y;
 	int	min;
 
 	div = 255 / 100 * 20;
-	y = 0;
-	while (y < data->map.height)
+	if (data->player.posY / 10 - 6 < 0)
+		y = 0;
+	else
+		y = data->player.posY / 10 - 6;
+	if (data->player.posY / 10 + 6 > data->map.height - 1)
+		y_end = data->map.height - 1;
+	else
+		y_end = data->player.posY / 10 + 6;
+	if (data->player.posX / 10 + 6 > data->map.width - 1)
+		x_end = data->map.width - 1;
+	else
+		x_end = data->player.posX / 10 + 6;
+	while (y <= y_end)
 	{
-		x = 0;
-		while (x < data->map.width)
+		if (data->player.posX / 10 - 6 < 0)
+			x = 0;
+		else
+			x = data->player.posX / 10 - 6;
+		while (x <= x_end)
 		{
 			dist_x = data->player.posX / 10 - x;
 			if (dist_x < 0)
@@ -130,5 +146,6 @@ void	ingame_draw(t_data *data)
 		y++;
 	}
 	ingame_draw_door(data, div);
-	ingame_draw_npc(data, div);
+	// if (data->game.npc_count >= 1)
+	// 	ingame_draw_npc(data, div);
 }

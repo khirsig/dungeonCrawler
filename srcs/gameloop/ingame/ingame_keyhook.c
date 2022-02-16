@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/04 21:13:12 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/16 14:56:42 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,6 @@ static void	ingame_player_movement(t_data *data)
 	int	colY;
 
 	ingame_player_movement_sprint(data);
-	// colX = (data->player.posX / 10 + (data->player.dirX / 10 - data->player.posX / 10) * data->player.movementspeed);
-	// colY = (data->player.posY / 10 + (data->player.dirY / 10 - data->player.posY / 10) * data->player.movementspeed);
-	printf("%i %i\n", colX, colY);
 	if (IsKeyDown(KEY_W))
 	{
 		float tempX = data->player.posX;
@@ -190,16 +187,16 @@ static void	ingame_player_rotation(t_data *data)
 	if (IsKeyDown(KEY_RIGHT) && !IsKeyDown(KEY_LEFT))
 	{
 		temp = data->player.planeX;
-		data->player.planeX = data->player.planeX * cos(0.05) - data->player.planeY * sin(0.05);
-		data->player.planeY = temp * sin(0.05) + data->player.planeY * cos(0.05);
+		data->player.planeX = data->player.planeX * cos(data->player.rotatespeed) - data->player.planeY * sin(data->player.rotatespeed);
+		data->player.planeY = temp * sin(data->player.rotatespeed) + data->player.planeY * cos(data->player.rotatespeed);
 		data->player.dirX = data->player.posX + data->player.planeX;
 		data->player.dirY = data->player.posY + data->player.planeY;
 	}
 	if (IsKeyDown(KEY_LEFT) && !IsKeyDown(KEY_RIGHT))
 	{
 		temp = data->player.planeX;
-		data->player.planeX = data->player.planeX * cos(-0.05) - data->player.planeY * sin(-0.05);
-		data->player.planeY = -temp * sin(0.05) + data->player.planeY * cos(0.05);
+		data->player.planeX = data->player.planeX * cos(-data->player.rotatespeed) - data->player.planeY * sin(-data->player.rotatespeed);
+		data->player.planeY = -temp * sin(data->player.rotatespeed) + data->player.planeY * cos(data->player.rotatespeed);
 		data->player.dirX = data->player.posX + data->player.planeX;
 		data->player.dirY = data->player.posY + data->player.planeY;
 	}
