@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:16:03 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/31 01:35:10 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/17 16:54:42 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ Texture	load_texture(char *path)
 
 void	init_window(t_data *data)
 {
-	data->window.height = SCREEN_HEIGHT;
-	data->window.width = SCREEN_WIDTH;
+	int	monitor = GetMonitorCount();
+	data->window.height = GetMonitorHeight(monitor);
+	data->window.width = GetMonitorWidth(monitor);
+	printf("===========/n%i: %i %i\n", monitor, data->window.height, data->window.width);
 	InitWindow(data->window.width, data->window.height, SCREEN_TITLE);
+	SetWindowState(FLAG_FULLSCREEN_MODE);
 	data->game.wall = malloc(sizeof(Texture) * 4);
 	data->game.wall[0] = load_texture("resources/textures/crypt00.png");
 	data->game.wall[1] = load_texture("resources/textures/crypt01.png");
