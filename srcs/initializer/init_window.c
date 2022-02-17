@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:16:03 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 23:29:54 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/17 23:37:09 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,25 @@ Texture	load_texture(char *path)
 	return (texture);
 }
 
-static void	button_transform(Texture *tex, char *path_prefix, char *path_rest, int lenX, int lenY, int end)
+static void	button_transform(Texture *tex, char *path_prefix, char *path_rest, int lenX, int lenY, int start, int end)
 {
-	int index;
 	Image image;
 	char *temp;
 	char *path;
+	int	og_start;
 
-	index = 2;
-	while (index < end)
+	og_start = start;
+	while (start < end)
 	{
-		temp = ft_strjoin(path_prefix, ft_itoa(index - 2));
+		temp = ft_strjoin(path_prefix, ft_itoa(start - og_start));
 		path = ft_strjoin(temp, path_rest);
 		free(temp);
 		image = LoadImage(path);
 		free(path);
 		ImageResize(&image, lenX, lenY);
-		tex[index] = LoadTextureFromImage(image);
+		tex[start] = LoadTextureFromImage(image);
 		UnloadImage(image);
-		index++;
+		start++;
 	}
 }
 
@@ -64,7 +64,7 @@ static void	init_window_mainmenu(t_data *data)
 	calc = 269 / 54;
 	data->window.button_lenX = data->window.width / 18 * calc;
 	data->window.button_lenY = data->window.width / 18;
-	button_transform(data->window.texture, "./resources/interface/mainmenu/BUTTON00", ".png", data->window.button_lenX, data->window.button_lenY, 12);
+	button_transform(data->window.texture, "./resources/interface/mainmenu/BUTTON00", ".png", data->window.button_lenX, data->window.button_lenY, 2, 12);
 }
 
 void	init_window(t_data *data)
