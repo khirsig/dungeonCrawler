@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:42:25 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/27 18:42:05 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/16 14:52:28 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 typedef struct s_window {
 	int	height;
 	int	width;
-	int	debugmode;
+	Texture2D	*cursor;
+	int	fps;
 }				t_window;
 
 #endif
