@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:17 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 16:26:21 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/17 20:10:40 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,15 @@ void	inventory_move(t_data *data)
 	}
 }
 
-void	inventory_draw_box(int x_start, int y_start, int x_len, int y_len, Color col)
-{
-	int	x;
-	int	y;
-
-	y = y_start;
-	while (y < y_start + y_len)
-	{
-		x = x_start;
-		while (x < x_start + x_len)
-		{
-			DrawPixel(x, y, GRAY);
-			x++;
-		}
-		y++;
-	}
-}
-
 void	inventory_draw(t_data *data)
 {
 	inventory_move(data);
 	// printf("Hallo %i %i %i %i %i?\n", data->player.inv.gui.status, data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY);
-	DrawRectangle(data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY, DARKGRAY);
-	DrawTexture(data->item.weapon[0].icon, data->player.inv.gui.posX + 10, data->player.inv.gui.posY + 10, WHITE);
-	DrawTexture(data->item.weapon[0].icon, data->player.inv.gui.posX + 84, data->player.inv.gui.posY + 84, WHITE);
-	DrawTexture(data->item.weapon[0].icon, data->player.inv.gui.posX + 10, data->player.inv.gui.posY + 84, WHITE);
-	DrawTexture(data->item.weapon[0].icon, data->player.inv.gui.posX + 84, data->player.inv.gui.posY + 10, WHITE);
+	// DrawRectangle(data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY, DARKGRAY);
+	DrawTexture(data->player.inv.gui.tex[0], data->player.inv.gui.posX, data->player.inv.gui.posY, WHITE);
+	DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 25, data->player.inv.gui.posY + 80, WHITE);
+	DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 75, data->player.inv.gui.posY + 130, WHITE);
+	DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 25, data->player.inv.gui.posY + 130, WHITE);
+	DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 75, data->player.inv.gui.posY + 80, WHITE);
 	// inventory_draw_box(data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY, DARKGRAY);
 }
