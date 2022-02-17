@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:16:03 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 21:47:27 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/17 23:29:54 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,30 +23,48 @@ Texture	load_texture(char *path)
 	return (texture);
 }
 
-void	init_window_mainmenu(t_data *data)
+static void	button_transform(Texture *tex, char *path_prefix, char *path_rest, int lenX, int lenY, int end)
 {
+	int index;
 	Image image;
+	char *temp;
+	char *path;
+
+	index = 2;
+	while (index < end)
+	{
+		temp = ft_strjoin(path_prefix, ft_itoa(index - 2));
+		path = ft_strjoin(temp, path_rest);
+		free(temp);
+		image = LoadImage(path);
+		free(path);
+		ImageResize(&image, lenX, lenY);
+		tex[index] = LoadTextureFromImage(image);
+		UnloadImage(image);
+		index++;
+	}
+}
+
+static void	init_window_mainmenu(t_data *data)
+{
+	Image	image;
+	double	calc;
 
 	image = LoadImage("./resources/interface/mainmenu/background.png");
 	ImageResize(&image, data->window.width, data->window.height);
 	data->window.texture[0] = LoadTextureFromImage(image);
 	UnloadImage(image);
-	image = LoadImage("./resources/interface/mainmenu/overlaytitle.png");
-	data->window.title_lenX = data->window.width / 4 * 3;
-	data->window.title_lenY = data->window.height / 5;
+	image = LoadImage("./resources/interface/mainmenu/TITLE.png");
+	calc = 897 / 141;
+	data->window.title_lenX = data->window.width / 8 * calc;
+	data->window.title_lenY = data->window.width / 8;
 	ImageResize(&image, data->window.title_lenX, data->window.title_lenY);
 	data->window.texture[1] = LoadTextureFromImage(image);
 	UnloadImage(image);
-	image = LoadImage("./resources/interface/mainmenu/buttonnormal.png");
-	data->window.button_lenX = data->window.width / 4;
-	data->window.button_lenY = data->window.height / 10;
-	ImageResize(&image, data->window.button_lenX, data->window.button_lenY);
-	data->window.texture[2] = LoadTextureFromImage(image);
-	UnloadImage(image);
-	image = LoadImage("./resources/interface/mainmenu/buttonhover.png");
-	ImageResize(&image, data->window.button_lenX, data->window.button_lenY);
-	data->window.texture[3] = LoadTextureFromImage(image);
-	UnloadImage(image);
+	calc = 269 / 54;
+	data->window.button_lenX = data->window.width / 18 * calc;
+	data->window.button_lenY = data->window.width / 18;
+	button_transform(data->window.texture, "./resources/interface/mainmenu/BUTTON00", ".png", data->window.button_lenX, data->window.button_lenY, 12);
 }
 
 void	init_window(t_data *data)
@@ -66,7 +84,7 @@ void	init_window(t_data *data)
 	data->window.cursor[1] = load_texture("resources/interface/cursor_l.png");
 	data->window.cursor[2] = load_texture("resources/interface/cursor_r.png");
 	// data->game.enemy_skin = malloc(sizeof(Texture) * 3);
-	data->window.texture = malloc(sizeof(Texture) * 5);
+	data->window.texture = malloc(sizeof(Texture) * 13);
 	init_window_mainmenu(data);
 	data->window.font = LoadFont("resources/fonts/main.ttf");
 	data->window.title_size = data->window.title_lenY / 3;

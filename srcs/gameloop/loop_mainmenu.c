@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:32:18 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 22:18:07 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/17 23:29:10 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,9 @@ static int	is_on_button(t_data *data, int posX, int posY)
 		return (0);
 }
 
-static void	draw_button(t_data *data, Texture tex, int posX, int posY, Color col, char *text, int texID)
+static void	draw_button(t_data *data, Texture tex, int posX, int posY)
 {
-	int	texX;
-
 	DrawTexture(tex, posX, posY, WHITE);
-	if (texID == 1)
-		texX = posX + (data->window.button_lenX / 40 * 14);
-	if (texID == 2)
-		texX = posX + (data->window.button_lenX / 40 * 14);
-	if (texID == 3)
-		texX = posX + (data->window.button_lenX / 40 * 17);
-	if (texID == 4)
-		texX = posX + (data->window.button_lenX / 40 * 12);
-	if (texID == 5)
-		texX = posX + (data->window.button_lenX / 40 * 19);
-	DrawTextEx(data->window.font, text, (Vector2){ texX, posY + (data->window.button_lenY / 5 * 2) }, data->window.button_size, 1, col);
 }
 
 void	loop_mainmenu(t_data *data)
@@ -44,34 +31,33 @@ void	loop_mainmenu(t_data *data)
 	ClearBackground(BLACK);
 	DrawTexture(data->window.texture[0], 0, 0, WHITE);
 	DrawTexture(data->window.texture[1], data->window.width / 2 - data->window.title_lenX / 7 * 4, data->window.height / 4 - data->window.title_lenY / 2, WHITE);
-	DrawTextEx(data->window.font, "Dungeon Crawler", (Vector2){ data->window.width / 2 - data->window.title_lenX / 4, data->window.height / 4 - data->window.title_lenY / 2 / 6}, data->window.title_size, 1, (Color){ 255, 255, 255, 150});
 	if (is_on_button(data, data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 4) == 1)
 	{
-		draw_button(data, data->window.texture[3], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 4, (Color){ 255, 255, 255, 180}, "Start Game", 1);
+		draw_button(data, data->window.texture[3], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 4);
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 			data->game.state = INGAME;
 	}
 	else
-		draw_button(data, data->window.texture[2], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 4, (Color){ 255, 255, 255, 100}, "Start Game", 1);
+		draw_button(data, data->window.texture[2], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 4);
 	if (is_on_button(data, data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 5) == 1)
-		draw_button(data, data->window.texture[3], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 5, (Color){ 255, 255, 255, 180}, "Load Game", 2);
+		draw_button(data, data->window.texture[5], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 5);
 	else
-		draw_button(data, data->window.texture[2], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 5, (Color){ 255, 255, 255, 100}, "Load Game", 2);
+		draw_button(data, data->window.texture[4], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 5);
 	if (is_on_button(data, data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 6) == 1)
-		draw_button(data, data->window.texture[3], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 6, (Color){ 255, 255, 255, 180}, "Options", 3);
+		draw_button(data, data->window.texture[7], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 6);
 	else
-		draw_button(data, data->window.texture[2], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 6, (Color){ 255, 255, 255, 100}, "Options", 3);
+		draw_button(data, data->window.texture[6], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 6);
 	if (is_on_button(data, data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 7) == 1)
-		draw_button(data, data->window.texture[3], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 7, (Color){ 255, 255, 255, 180}, "Achievements", 4);
+		draw_button(data, data->window.texture[9], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 7);
 	else
-		draw_button(data, data->window.texture[2], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 7, (Color){ 255, 255, 255, 100}, "Achievements", 4);
+		draw_button(data, data->window.texture[8], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 7);
 	if (is_on_button(data, data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 8) == 1)
 	{
-		draw_button(data, data->window.texture[3], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 8, (Color){ 255, 255, 255, 180}, "Exit", 5);
+		draw_button(data, data->window.texture[11], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 8);
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 			exit(EXIT_SUCCESS);
 	}
 	else
-		draw_button(data, data->window.texture[2], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 8, (Color){ 255, 255, 255, 100}, "Exit", 5);
+		draw_button(data, data->window.texture[10], data->window.width / 2 - data->window.button_lenX / 2, data->window.height / 10 * 8);
 	EndDrawing();
 }
