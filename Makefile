@@ -3,7 +3,7 @@ CC = gcc
 NAME = dungeon
 
 LIBPATH = ./libft/libft.a
-LFLAGS =  -lraylib
+LFLAGS =  -lraylib -O2
 
 OBJDIR = ./objs/
 OBJECTS = $(OBJDIR)/*.o
@@ -13,13 +13,16 @@ SRC =	srcs/main.c										\
 		srcs/initializer/init_window.c					\
 		srcs/initializer/init_player.c					\
 		srcs/initializer/init_npc.c						\
+		srcs/initializer/init_inventory.c				\
 		srcs/initializer/init_gameloop.c				\
+		srcs/initializer/items/init_weapons.c			\
 		srcs/gameloop/gameloop.c						\
 		srcs/gameloop/loop_mainmenu.c					\
 		srcs/gameloop/loop_loadingscreen.c				\
 		srcs/gameloop/loop_ingame.c						\
 		srcs/gameloop/ingame/ingame_draw.c				\
 		srcs/gameloop/ingame/ingame_keyhook.c			\
+		srcs/gameloop/ingame/ingame_inventory.c			\
 		srcs/gameloop/ingame/ingame_interface.c			\
 		srcs/parser/parser.c							\
 		srcs/parser/parser_map.c						\

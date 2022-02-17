@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gameloop.h                                         :+:      :+:    :+:   */
+/*   items.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 23:24:11 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 13:22:09 by khirsig          ###   ########.fr       */
+/*   Created: 2022/02/17 16:05:40 by khirsig           #+#    #+#             */
+/*   Updated: 2022/02/17 16:17:01 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAMELOOP_H
-# define GAMELOOP_H
+#ifndef  ITEMS_H
+# define ITEMS_H
 
-# include "raylib.h"
-# include "../data.h"
-# include "ingame/loop_ingame.h"
+typedef struct s_weapon {
+	Texture	icon;
+	int		id;
+	int		damage;
+	int		durability;
+	int		upgrade;
+}				t_weapon;
 
-void	loop_mainmenu(t_data *data);
-void	loop_loadingscreen(t_data *data);
-void	loop_ingame(t_data *data);
+typedef struct s_item {
+	t_weapon	*weapon;
+}				t_item;
+
 
 #endif

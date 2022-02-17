@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 13:28:54 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/16 14:55:14 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/17 14:25:52 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ void	loop_ingame(t_data *data)
 	ingame_draw(data);
 	EndMode3D();
 	ingame_interface(data);
+	if (data->player.inv.gui.status == OPEN)
+		inventory_draw(data);
 	EndDrawing();
 }

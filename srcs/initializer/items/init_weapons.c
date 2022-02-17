@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gameloop.h                                         :+:      :+:    :+:   */
+/*   init_weapons.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 23:24:11 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 13:22:09 by khirsig          ###   ########.fr       */
+/*   Created: 2022/02/17 16:10:43 by khirsig           #+#    #+#             */
+/*   Updated: 2022/02/17 16:22:52 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAMELOOP_H
-# define GAMELOOP_H
+#include "../initializer.h"
 
-# include "raylib.h"
-# include "../data.h"
-# include "ingame/loop_ingame.h"
-
-void	loop_mainmenu(t_data *data);
-void	loop_loadingscreen(t_data *data);
-void	loop_ingame(t_data *data);
-
-#endif
+void	init_weapons(t_data *data)
+{
+	data->item.weapon = malloc(sizeof(t_weapon) * 2);
+	data->item.weapon[0].icon = load_texture("resources/interface/items/WEP001.png");
+}

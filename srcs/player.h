@@ -6,15 +6,18 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:35:34 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/16 14:54:41 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/17 13:03:03 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_H
 # define PLAYER_H
 
+#include "inventory.h"
+
 typedef struct s_player {
 	Camera	camera;
+	t_inventory inv;
 	double	posX;
 	double	posY;
 	double	posZ;

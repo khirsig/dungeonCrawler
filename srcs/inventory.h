@@ -1,24 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gameloop.h                                         :+:      :+:    :+:   */
+/*   inventory.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 23:24:11 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 13:22:09 by khirsig          ###   ########.fr       */
+/*   Created: 2022/02/17 12:57:55 by khirsig           #+#    #+#             */
+/*   Updated: 2022/02/17 14:33:12 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAMELOOP_H
-# define GAMELOOP_H
+#ifndef INVENTORY_H
+# define INVENTORY_H
 
-# include "raylib.h"
-# include "../data.h"
-# include "ingame/loop_ingame.h"
+# define CLOSED 0
+# define OPEN 1
 
-void	loop_mainmenu(t_data *data);
-void	loop_loadingscreen(t_data *data);
-void	loop_ingame(t_data *data);
+typedef struct s_gui {
+	int		lenX;
+	int		lenY;
+	int		posX;
+	int		posY;
+	int		status;
+	int		moving;
+	int		mouseX;
+	int		mouseY;
+}				t_gui;
+
+typedef struct s_inventory {
+	t_gui	gui;
+	int		head;
+	int		weapon;
+	int		chest;
+	int		legs;
+	int		feet;
+	int		hands;
+	int		neck;
+}				t_inventory;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/16 14:56:42 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/17 13:23:36 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,4 +208,5 @@ void	ingame_keyhook(t_data *data)
 	ingame_player_movement_jump(data);
 	ingame_player_rotation(data);
 	ingame_player_actions(data);
+	inventory_open(data);
 }
