@@ -15,7 +15,6 @@ SRC =	srcs/main.c										\
 		srcs/initializer/init_npc.c						\
 		srcs/initializer/init_inventory.c				\
 		srcs/initializer/init_gameloop.c				\
-		srcs/initializer/items/init_weapons.c			\
 		srcs/gameloop/gameloop.c						\
 		srcs/gameloop/loop_mainmenu.c					\
 		srcs/gameloop/loop_loadingscreen.c				\

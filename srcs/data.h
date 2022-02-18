@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:41:34 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 16:10:01 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 00:40:59 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_data {
 	t_map		map;
 	t_player	player;
 	t_npc		*npc;
-	t_item		item;
+	t_item		*item;
 }				t_data;
 
 #endif

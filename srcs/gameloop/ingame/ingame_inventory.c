@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:17 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 20:10:40 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 01:17:48 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,25 @@ void	inventory_draw(t_data *data)
 	// printf("Hallo %i %i %i %i %i?\n", data->player.inv.gui.status, data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY);
 	// DrawRectangle(data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY, DARKGRAY);
 	DrawTexture(data->player.inv.gui.tex[0], data->player.inv.gui.posX, data->player.inv.gui.posY, WHITE);
-	DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 25, data->player.inv.gui.posY + 80, WHITE);
-	DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 75, data->player.inv.gui.posY + 130, WHITE);
-	DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 25, data->player.inv.gui.posY + 130, WHITE);
-	DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 75, data->player.inv.gui.posY + 80, WHITE);
+	int incr = 60;
+	int	y = 0;
+	while (y < 7)
+	{
+		int posY = data->player.inv.gui.posY + 80 + incr * y;
+		int	x = 0;
+		while (x < 5)
+		{
+			int posX = data->player.inv.gui.posX + 40 + incr * x;
+			if (data->player.inv.slot[y][x].status == UNLOCKED)
+				DrawTexture(data->player.inv.gui.tex[1], posX, posY, WHITE);
+			if (data->player.inv.slot[y][x].id != -1)
+			{
+				DrawTexture(data->item[data->player.inv.slot[y][x].id].icon, posX + 10, posY + 10, WHITE);
+			}
+			x++;
+		}
+		y++;
+	}
+	// DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 75, data->player.inv.gui.posY + 80, WHITE);
 	// inventory_draw_box(data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY, DARKGRAY);
 }
