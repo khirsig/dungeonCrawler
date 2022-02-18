@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:15:29 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 00:52:26 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 14:31:19 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ void	initializer(t_data *data)
 	init_player(data);
 	init_npc(data);
 	init_inventory(data);
+	init_console(data);
 }

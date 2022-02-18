@@ -12,6 +12,7 @@ SRC =	srcs/main.c										\
 		srcs/initializer/initializer.c					\
 		srcs/initializer/init_window.c					\
 		srcs/initializer/init_player.c					\
+		srcs/initializer/init_console.c					\
 		srcs/initializer/init_npc.c						\
 		srcs/initializer/init_inventory.c				\
 		srcs/initializer/init_gameloop.c				\
@@ -22,7 +23,9 @@ SRC =	srcs/main.c										\
 		srcs/gameloop/ingame/ingame_draw.c				\
 		srcs/gameloop/ingame/ingame_keyhook.c			\
 		srcs/gameloop/ingame/ingame_inventory.c			\
+		srcs/gameloop/ingame/ingame_item.c				\
 		srcs/gameloop/ingame/ingame_interface.c			\
+		srcs/gameloop/ingame/ingame_console.c			\
 		srcs/parser/parser.c							\
 		srcs/parser/parser_map.c						\
 		srcs/parser/parser_map_length.c					\

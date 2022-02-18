@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:16:52 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 16:21:10 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 14:31:28 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	init_npc(t_data *data);
 Texture	load_texture(char *path);
 void	init_inventory(t_data *data);
 void	init_weapons(t_data *data);
+void	init_console(t_data *data);
 
 #endif

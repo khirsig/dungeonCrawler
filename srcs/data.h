@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:41:34 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 00:40:59 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 14:23:49 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "player.h"
 # include "npc.h"
 # include "items.h"
+# include "console.h"
 
 typedef struct s_data {
 	t_window	window;
@@ -27,6 +28,7 @@ typedef struct s_data {
 	t_player	player;
 	t_npc		*npc;
 	t_item		*item;
+	t_console	console;
 }				t_data;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 16:05:40 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 00:45:58 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 12:07:34 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_item {
 	int		durability;
 	int		upgrade_level;
 	int		price;
+	int		stackable;
+	Color	rarity;
 	char	*tooltip;
 	char	*name;
 }				t_item;

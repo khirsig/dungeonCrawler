@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 13:28:54 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 16:48:37 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 14:28:47 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	loop_ingame(t_data *data)
 	ingame_interface(data);
 	if (data->player.inv.gui.status == OPEN)
 		inventory_draw(data);
+	if (data->console.status == 1)
+		console_prompt(data);
 	EndDrawing();
-	// printf("%i %i\n", GetScreenWidth(), GetScreenHeight());
-	// data->window.height = GetScreenHeight();
-	// data->window.width = GetScreenWidth();
 }

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_ingame.h                                      :+:      :+:    :+:   */
+/*   console.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/22 12:50:55 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 16:11:15 by khirsig          ###   ########.fr       */
+/*   Created: 2022/02/18 12:30:32 by khirsig           #+#    #+#             */
+/*   Updated: 2022/02/18 14:23:04 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INGAME_DRAW_H
-# define INGAME_DRAW_H
+#ifndef CONSOLE_H
+# define CONSOLE_H
 
-# include "../../main.h"
-# include <stdlib.h>
-
-void	ingame_keyhook(t_data *data);
-void	ingame_draw(t_data *data);
-void	ingame_interface(t_data *data);
-void	inventory_open(t_data *data);
-void	inventory_draw(t_data *data);
-void	open_console(t_data *data);
-void	console_prompt(t_data *data);
-void	add_item_to_inventory(t_data *data, int id, int amount);
+typedef struct s_console {
+	char	*prompt;
+	int		status;
+}				t_console;
 
 #endif

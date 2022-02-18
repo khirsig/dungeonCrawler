@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:17 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 11:40:15 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 12:13:42 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,11 @@ void	inventory_draw(t_data *data)
 		while (x < 5)
 		{
 			int posX = data->player.inv.gui.posX + (data->player.inv.gui.lenX / 11) + incr * x;
-			if (data->player.inv.slot[y][x].status == UNLOCKED)
+			if (data->player.inv.slot[y][x].status == UNLOCKED && data->player.inv.slot[y][x].id == -1)
 				DrawTexture(data->player.inv.gui.tex[1], posX, posY, WHITE);
-			if (data->player.inv.slot[y][x].id != -1)
+			else if (data->player.inv.slot[y][x].id != -1)
 			{
+				DrawTexture(data->player.inv.gui.tex[1], posX, posY, data->item[data->player.inv.slot[y][x].id].rarity);
 				DrawTexture(data->item[data->player.inv.slot[y][x].id].icon, posX + (incr / 5), posY + (incr / 5), WHITE);
 				if (data->player.inv.slot[y][x].amount > 1)
 					DrawText(ft_itoa(data->player.inv.slot[y][x].amount), posX + (incr - incr / 5), posY + (incr / 10), incr / 5, WHITE);
