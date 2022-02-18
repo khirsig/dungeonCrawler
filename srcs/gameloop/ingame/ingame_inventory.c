@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:17 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 12:13:42 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 21:08:16 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,26 @@ void	inventory_open(t_data *data)
 {
 	if(IsKeyPressed(KEY_I))
 	{
-		printf("Inv Debug: status: %i x: %i y: %i x_len: %i y_len: %i\n", data->player.inv.gui.status, data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY);
 		if (data->player.inv.gui.status == CLOSED)
 			data->player.inv.gui.status = OPEN;
 		else if (data->player.inv.gui.status == OPEN)
 			data->player.inv.gui.status = CLOSED;
 	}
+}
+
+static int	calc_pow(int i)
+{
+	if (i / 10 == 0)
+		return (5);
+	if (i / 100 == 0)
+		return (3);
+	if (i / 1000 == 0)
+		return (7);
+	if (i / 10000 == 0)
+		return (8);
+	if (i / 100000 == 0)
+		return (9);
+	return (0);
 }
 
 void	inventory_move(t_data *data)
@@ -68,9 +82,9 @@ void	inventory_draw(t_data *data)
 			else if (data->player.inv.slot[y][x].id != -1)
 			{
 				DrawTexture(data->player.inv.gui.tex[1], posX, posY, data->item[data->player.inv.slot[y][x].id].rarity);
-				DrawTexture(data->item[data->player.inv.slot[y][x].id].icon, posX + (incr / 5), posY + (incr / 5), WHITE);
+				DrawTexture(data->item[data->player.inv.slot[y][x].id].icon, posX + 1, posY + 1, WHITE);
 				if (data->player.inv.slot[y][x].amount > 1)
-					DrawText(ft_itoa(data->player.inv.slot[y][x].amount), posX + (incr - incr / 5), posY + (incr / 10), incr / 5, WHITE);
+					DrawText(ft_itoa(data->player.inv.slot[y][x].amount), posX + (incr - (incr / calc_pow(data->player.inv.slot[y][x].amount))), posY + (incr / 10), incr / 5, WHITE);
 			}
 			x++;
 		}

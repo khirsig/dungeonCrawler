@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:54 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 16:36:13 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 21:09:09 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static Texture load_icon(t_data *data, char *path)
 	Texture texture;
 	int		lenIcon;
 
-	lenIcon = data->player.inv.gui.lenCell / 3 * 2;
+	lenIcon = data->player.inv.gui.lenCell - 2;
 	image = LoadImage(path);
 	ImageResize(&image, lenIcon, lenIcon);
 	texture = LoadTextureFromImage(image);
@@ -82,7 +82,9 @@ void	init_inventory(t_data *data)
 		}
 		y++;
 	}
-	data->item = malloc(sizeof(t_item) * 3);
-	init_item(data, &data->item[0], 0, "Apple", CONSUMEABLE, 10, 99, -1, -1, -1, "Tastes fresh and delicious.", WHITE, "./resources/interface/items/ITEM001.png");
-	init_item(data, &data->item[1], 1, "Tutorial", STATIC, 0, 1, -1, -1, -1, "Thanks for playing this one man game!.", WHITE, "./resources/interface/items/ITEM000.png");
+	data->item = malloc(sizeof(t_item) * 4);
+	//		data, item array,      id, name,     type, price, stackable, damage, durability, upgrade lvl, tooltip, rarity, path
+	init_item(data, &data->item[0], 0, "Apple", CONSUMEABLE, 10, 99, -1, -1, -1, "Tastes fresh and delicious.", WHITE, "./resources/interface/items/ITEM000.png");
+	init_item(data, &data->item[1], 1, "Tutorial", STATIC, 0, 1, -1, -1, -1, "Thanks for playing this one man game!.", WHITE, "./resources/interface/items/ITEM001.png");
+	init_item(data, &data->item[2], 2, "Claymore", WEAPON, 300, 1, 33, 100, 1, "A strong big claymore. May be wield with two hands.", WHITE, "./resources/interface/items/ITEM002.png");
 }

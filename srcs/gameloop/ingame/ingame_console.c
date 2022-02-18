@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:22:01 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 17:18:43 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 17:59:29 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,37 @@ void	open_console(t_data *data)
 		data->console.status = 1;
 	else if (data->console.status == 1 && IsKeyPressed(KEY_MINUS))
 		data->console.status = 0;
+}
+
+static void	add_to_history(t_data *data, char *str)
+{
+	if (str == NULL || (data->console.history != NULL && TextIsEqual(data->console.history[data->console.history_count - 1], str)))
+		return ;
+	data->console.history_count++;
+	data->console.history_save = data->console.history_count;
+	data->console.history = realloc(data->console.history, sizeof(char *) * (data->console.history_count + 1));
+	data->console.history[data->console.history_count - 1] = strdup(str);
+	data->console.history[data->console.history_count] = NULL;
+}
+
+static void	get_history(t_data *data)
+{
+	if (data->console.history_save == 0)
+		return ;
+	if (data->console.prompt != NULL)
+		free(data->console.prompt);
+	data->console.prompt = strdup(data->console.history[data->console.history_save - 1]);
+	data->console.history_save--;
+}
+
+static void	get_history_reverse(t_data *data)
+{
+	if (data->console.history_save == data->console.history_count)
+		return ;
+	if (data->console.prompt != NULL)
+		free(data->console.prompt);
+	data->console.prompt = strdup(data->console.history[data->console.history_save - 1]);
+	data->console.history_save++;
 }
 
 static void	console_prompt_join(t_data *data, char c)
@@ -54,6 +85,7 @@ static void	console_prompt_del(t_data *data)
 	char	*temp;
 	int		len;
 
+	data->console.history_save = data->console.history_count;
 	len = strlen(data->console.prompt);
 	if (len == 1)
 	{
@@ -82,7 +114,10 @@ static void	console_command(t_data *data, char *cmd)
 
 	split_cmd = ft_split(cmd, ' ');
 	if (TextIsEqual(split_cmd[0], "additem") && split_cmd[1] != NULL && split_cmd[2] != NULL)
+	{
 		add_item_to_inventory(data, ft_atoi(split_cmd[1]), ft_atoi(split_cmd[2]));
+		add_to_history(data, cmd);
+	}
 }
 
 void	console_prompt(t_data *data)
@@ -91,6 +126,7 @@ void	console_prompt(t_data *data)
 	int		enter;
 	int		promptWidth;
 
+	printf("%i\n", data->console.history_save);
 	DrawRectangle(5, 5, 500, 40, BLACK);
 	DrawText(">>", 15, 15, 20, WHITE);
 	key = GetCharPressed();
@@ -99,6 +135,10 @@ void	console_prompt(t_data *data)
 		promptWidth = MeasureText(data->console.prompt, 15);
 	if (key != '-' && promptWidth < 450)
 		console_prompt_join(data, key);
+	if (enter == KEY_UP)
+		get_history(data);
+	if (enter == KEY_DOWN)
+		get_history_reverse(data);
 	if (enter == KEY_BACKSPACE && data->console.prompt != NULL)
 		console_prompt_del(data);
 	if (enter == KEY_ENTER)
