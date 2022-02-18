@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:17 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 01:17:48 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 11:40:15 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,26 @@ void	inventory_move(t_data *data)
 void	inventory_draw(t_data *data)
 {
 	inventory_move(data);
-	// printf("Hallo %i %i %i %i %i?\n", data->player.inv.gui.status, data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY);
-	// DrawRectangle(data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY, DARKGRAY);
 	DrawTexture(data->player.inv.gui.tex[0], data->player.inv.gui.posX, data->player.inv.gui.posY, WHITE);
-	int incr = 60;
+	int incr = data->player.inv.gui.lenCell;
 	int	y = 0;
 	while (y < 7)
 	{
-		int posY = data->player.inv.gui.posY + 80 + incr * y;
+		int posY = data->player.inv.gui.posY + (data->player.inv.gui.lenY / 7) + incr * y;
 		int	x = 0;
 		while (x < 5)
 		{
-			int posX = data->player.inv.gui.posX + 40 + incr * x;
+			int posX = data->player.inv.gui.posX + (data->player.inv.gui.lenX / 11) + incr * x;
 			if (data->player.inv.slot[y][x].status == UNLOCKED)
 				DrawTexture(data->player.inv.gui.tex[1], posX, posY, WHITE);
 			if (data->player.inv.slot[y][x].id != -1)
 			{
-				DrawTexture(data->item[data->player.inv.slot[y][x].id].icon, posX + 10, posY + 10, WHITE);
+				DrawTexture(data->item[data->player.inv.slot[y][x].id].icon, posX + (incr / 5), posY + (incr / 5), WHITE);
+				if (data->player.inv.slot[y][x].amount > 1)
+					DrawText(ft_itoa(data->player.inv.slot[y][x].amount), posX + (incr - incr / 5), posY + (incr / 10), incr / 5, WHITE);
 			}
 			x++;
 		}
 		y++;
 	}
-	// DrawTexture(data->player.inv.gui.tex[1], data->player.inv.gui.posX + 75, data->player.inv.gui.posY + 80, WHITE);
-	// inventory_draw_box(data->player.inv.gui.posX, data->player.inv.gui.posY, data->player.inv.gui.lenX, data->player.inv.gui.lenY, DARKGRAY);
 }

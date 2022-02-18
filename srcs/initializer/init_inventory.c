@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:54 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 01:19:29 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 11:33:00 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,30 @@ static void	load_inventory_texture(t_data *data)
 	Image image;
 
 	image = LoadImage("./resources/interface/inventory/panel.png");
-	// ImageResize(image, data->player.inv.gui.lenX, data->player.inv.gui.lenY);
+	ImageResize(&image, data->player.inv.gui.lenX, data->player.inv.gui.lenY);
 	data->player.inv.gui.tex[0] = LoadTextureFromImage(image);
 	UnloadImage(image);
 	image = LoadImage("./resources/interface/inventory/cell.png");
-	ImageResize(&image, 60, 60);
+	ImageResize(&image, data->player.inv.gui.lenCell, data->player.inv.gui.lenCell);
 	data->player.inv.gui.tex[1] = LoadTextureFromImage(image);
 	UnloadImage(image);
 }
 
-static Texture load_icon(char *path)
+static Texture load_icon(t_data *data, char *path)
 {
 	Image image;
 	Texture texture;
+	int		lenIcon;
 
+	lenIcon = data->player.inv.gui.lenCell / 3 * 2;
 	image = LoadImage(path);
-	ImageResize(&image, 40, 40);
+	ImageResize(&image, lenIcon, lenIcon);
 	texture = LoadTextureFromImage(image);
 	UnloadImage(image);
 	return (texture);
 }
 
-static void	init_item(t_item *item, int id, char *name, int type, int price, int damage, int durability, int upgrade_level, char *tooltip, char *path)
+static void	init_item(t_data *data, t_item *item, int id, char *name, int type, int price, int damage, int durability, int upgrade_level, char *tooltip, char *path)
 {
 	item->id = id;
 	item->name = name;
@@ -48,13 +50,17 @@ static void	init_item(t_item *item, int id, char *name, int type, int price, int
 	item->durability = durability;
 	item->upgrade_level = upgrade_level;
 	item->tooltip = tooltip;
-	item->icon = load_icon(path);
+	item->icon = load_icon(data, path);
 }
 
 void	init_inventory(t_data *data)
 {
-	data->player.inv.gui.lenX = data->window.width / 5;
-	data->player.inv.gui.lenY = data->window.height / 2;
+	double	calc = 544.0 / 379.0;
+
+	printf("%f calc\n", calc);
+	data->player.inv.gui.lenX = data->window.width / 4;
+	data->player.inv.gui.lenY = data->window.width / 4 * calc;
+	data->player.inv.gui.lenCell = data->player.inv.gui.lenX / 6;
 	data->player.inv.gui.posX = data->window.width / 2 - (data->player.inv.gui.lenX / 2);
 	data->player.inv.gui.posY = data->window.width / 4 - (data->player.inv.gui.lenY / 2);
 	data->player.inv.gui.status = CLOSED;
@@ -69,14 +75,16 @@ void	init_inventory(t_data *data)
 		{
 			data->player.inv.slot[y][x].id = -1;
 			data->player.inv.slot[y][x].status = UNLOCKED;
-			data->player.inv.slot[y][x].type = 0;
+			data->player.inv.slot[y][x].type = -1;
+			data->player.inv.slot[y][x].amount = -1;
 			x++;
 		}
 		y++;
 	}
 	data->item = malloc(sizeof(t_item) * 3);
-	init_item(&data->item[0], 0, "Apple", CONSUMEABLE, 10, -1, -1, -1, "Tastes fresh and delicious.", "./resources/interface/items/ITEM001.png");
-	init_item(&data->item[1], 0, "Tutorial", STATIC, 0, -1, -1, -1, "Thanks for playing this one man game!.", "./resources/interface/items/ITEM000.png");
+	init_item(data, &data->item[0], 0, "Apple", CONSUMEABLE, 10, -1, -1, -1, "Tastes fresh and delicious.", "./resources/interface/items/ITEM001.png");
+	init_item(data, &data->item[1], 0, "Tutorial", STATIC, 0, -1, -1, -1, "Thanks for playing this one man game!.", "./resources/interface/items/ITEM000.png");
 	data->player.inv.slot[0][1].id = 0;
 	data->player.inv.slot[0][0].id = 1;
+	data->player.inv.slot[0][1].amount = 75;
 }

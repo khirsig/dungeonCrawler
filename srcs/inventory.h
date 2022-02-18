@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 12:57:55 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 00:50:54 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 11:19:30 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ typedef struct s_gui {
 	int		moving;
 	int		mouseX;
 	int		mouseY;
+	int		lenCell;
 }				t_gui;
 
 typedef struct s_slot {
 	int		status;
 	int		type;
 	int		id;
+	int		amount;
 }				t_slot;
 
 typedef struct s_inventory {
