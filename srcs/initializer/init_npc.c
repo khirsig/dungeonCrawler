@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 21:55:27 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 13:04:03 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/19 00:04:54 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	init_breton_woman(t_data *data, int index)
 {
-	printf("HALLO\n");
 	data->npc[index].texture = malloc(sizeof(Texture) * 23);
 	data->npc[index].texture[0] = load_texture("resources/sprites/002_skeleton/0-0.png");
 	data->npc[index].texture[1] = load_texture("resources/sprites/002_skeleton/0-1.png");

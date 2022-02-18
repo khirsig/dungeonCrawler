@@ -6,17 +6,18 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/17 11:46:49 by khirsig           #+#    #+#             */
-/*   Updated: 2021/11/04 08:11:22 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/19 00:07:50 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
 int	ft_atoi(const char *str)
 {
 	int		count;
 	int		minus;
-	long	numb;
+	long long	numb;
 
 	minus = 1;
 	while ((*str >= 9 && *str <= 13) || *str == 32)
@@ -32,5 +33,9 @@ int	ft_atoi(const char *str)
 		numb = numb * 10 + str[count] - '0';
 		count++;
 	}
+	if (numb > INT_MAX)
+		numb = INT_MAX;
+	if (numb < INT_MIN)
+		numb = INT_MIN;
 	return ((int)(numb * minus));
 }

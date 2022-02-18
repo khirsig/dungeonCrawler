@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:39:41 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/16 14:52:09 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/18 23:46:04 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,6 @@ void	init_player(t_data *data)
 	data->player.camera.target = (Vector3){ data->player.dirX, data->player.dirZ, data->player.dirY };
 	data->player.camera.up = (Vector3){ 0.0f, 1.0f, 0.0f };
 	data->player.camera.fovy = SCREEN_FOV;
+	data->player.soulgem = 0;
+	data->player.gold = 0;
 }

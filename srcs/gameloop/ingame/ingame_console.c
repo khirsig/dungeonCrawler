@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:22:01 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 17:59:29 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/19 00:04:02 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,16 @@ static void	console_command(t_data *data, char *cmd)
 		add_item_to_inventory(data, ft_atoi(split_cmd[1]), ft_atoi(split_cmd[2]));
 		add_to_history(data, cmd);
 	}
+	if (TextIsEqual(split_cmd[0], "addgold") && split_cmd[1] != NULL)
+	{
+		add_gold(data, ft_atoi(split_cmd[1]));
+		add_to_history(data, cmd);
+	}
+	if (TextIsEqual(split_cmd[0], "addsoulgem") && split_cmd[1] != NULL)
+	{
+		add_soulgem(data, ft_atoi(split_cmd[1]));
+		add_to_history(data, cmd);
+	}
 }
 
 void	console_prompt(t_data *data)
@@ -126,7 +136,6 @@ void	console_prompt(t_data *data)
 	int		enter;
 	int		promptWidth;
 
-	printf("%i\n", data->console.history_save);
 	DrawRectangle(5, 5, 500, 40, BLACK);
 	DrawText(">>", 15, 15, 20, WHITE);
 	key = GetCharPressed();

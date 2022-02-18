@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   ingame_currency.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/25 17:42:21 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 21:19:41 by khirsig          ###   ########.fr       */
+/*   Created: 2022/02/18 23:56:00 by khirsig           #+#    #+#             */
+/*   Updated: 2022/02/19 00:10:49 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DC_CONFIG_H
-# define DC_CONFIG_H
+#include "loop_ingame.h"
+#include <limits.h>
 
-# define SCREEN_WIDTH	1408
-# define SCREEN_HEIGHT	792
-# define SCREEN_FPS		123
-# define SCREEN_FOV		60.0f
-# define SCREEN_TITLE	"dungeonCrawler"
+void	add_gold(t_data *data, int amount)
+{
+	if ((long long)(data->player.gold) + amount > INT_MAX)
+		data->player.gold = INT_MAX;
+	else
+		data->player.gold += amount;
+}
 
-#endif
+void	add_soulgem(t_data *data, int amount)
+{
+	if ((long long)(data->player.soulgem) + amount > INT_MAX)
+		data->player.soulgem = INT_MAX;
+	else
+		data->player.soulgem += amount;
+}
