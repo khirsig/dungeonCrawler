@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:22:01 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/19 00:04:02 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/19 02:12:40 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,16 @@ static void	console_command(t_data *data, char *cmd)
 	if (TextIsEqual(split_cmd[0], "addsoulgem") && split_cmd[1] != NULL)
 	{
 		add_soulgem(data, ft_atoi(split_cmd[1]));
+		add_to_history(data, cmd);
+	}
+	if (TextIsEqual(split_cmd[0], "rmvgold") && split_cmd[1] != NULL)
+	{
+		remove_gold(data, ft_atoi(split_cmd[1]));
+		add_to_history(data, cmd);
+	}
+	if (TextIsEqual(split_cmd[0], "rmvsoulgem") && split_cmd[1] != NULL)
+	{
+		remove_soulgem(data, ft_atoi(split_cmd[1]));
 		add_to_history(data, cmd);
 	}
 }

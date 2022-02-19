@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:50:55 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 23:58:13 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/19 02:12:55 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,7 @@ void	console_prompt(t_data *data);
 void	add_item_to_inventory(t_data *data, int id, int amount);
 void	add_soulgem(t_data *data, int amount);
 void	add_gold(t_data *data, int amount);
+void	remove_gold(t_data *data, int amount);
+void	remove_soulgem(t_data *data, int amount);
 
 #endif

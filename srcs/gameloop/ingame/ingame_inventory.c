@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:17 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 23:53:46 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/02/19 02:05:20 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,64 @@ void	inventory_move(t_data *data)
 	}
 }
 
+static char *get_currency_string(t_data *data, int amount)
+{
+	char *amount_conv;
+	char *ret;
+	int len;
+	int i;
+	int j;
+
+	amount_conv = ft_itoa(amount);
+	len = strlen(amount_conv);
+	if (len <= 3)
+		return (amount_conv);
+	else if (len > 3 && len <= 6)
+	{
+		ret = malloc(sizeof(char) * (len + 2));
+		ret[len + 1] = '\0';
+		i = 0;
+		j = 0;
+		while (amount_conv[j] != '\0')
+		{
+			if (i != len - 3)
+			{
+				ret[i] = amount_conv[j];
+				j++;
+			}
+			else
+				ret[i] = '.';
+			i++;
+		}
+		return (ret);
+	}
+	else if (len > 6)
+	{
+		j = len - 6 + 3;
+		ret = malloc(sizeof(char) * (j));
+		ret[j] = '\0';
+		ret[j - 1] = 'm';
+		i = 0;
+		while (i < j - 1)
+		{
+			if (i != j - 3)
+				ret[i] = amount_conv[i];
+			else
+				ret[i] = ',';
+			i++;
+		}
+		return (ret);
+	}
+	return (amount_conv);
+}
+
 void	inventory_draw(t_data *data)
 {
 	inventory_move(data);
 	DrawTexture(data->player.inv.gui.tex[0], data->player.inv.gui.posX, data->player.inv.gui.posY, WHITE);
 	int incr = data->player.inv.gui.lenCell;
-	DrawTextEx(data->window.font, ft_itoa(data->player.gold), (Vector2){ data->player.inv.gui.posX + data->player.inv.gui.lenX / 9 * 2, data->player.inv.gui.posY + data->player.inv.gui.lenY / 40 * 39 }, incr / 5, 1, GRAY);
-	DrawTextEx(data->window.font, ft_itoa(data->player.soulgem), (Vector2){ data->player.inv.gui.posX + data->player.inv.gui.lenX / 13 * 8, data->player.inv.gui.posY + data->player.inv.gui.lenY / 40 * 39 }, incr / 5, 1, GRAY);
+	DrawTextEx(data->window.font, get_currency_string(data, data->player.gold), (Vector2){ data->player.inv.gui.posX + data->player.inv.gui.lenX / 9 * 2, data->player.inv.gui.posY + data->player.inv.gui.lenY / 40 * 39 }, incr / 5, 1, GRAY);
+	DrawTextEx(data->window.font, get_currency_string(data, data->player.soulgem), (Vector2){ data->player.inv.gui.posX + data->player.inv.gui.lenX / 13 * 8, data->player.inv.gui.posY + data->player.inv.gui.lenY / 40 * 39 }, incr / 5, 1, GRAY);
 	int	y = 0;
 	while (y < 7)
 	{
