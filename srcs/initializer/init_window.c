@@ -6,22 +6,11 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:16:03 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 12:22:30 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 15:19:58 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "initializer.h"
-
-Texture	load_texture(char *path)
-{
-	Image image;
-	Texture	texture;
-
-	image = LoadImage(path);
-	texture = LoadTextureFromImage(image);
-	UnloadImage(image);
-	return (texture);
-}
 
 static void	button_transform(Texture *tex, char *path_prefix, char *path_rest, int lenX, int lenY, int start, int end)
 {

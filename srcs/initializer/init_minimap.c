@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initializer.c                                      :+:      :+:    :+:   */
+/*   init_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/21 23:15:29 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 15:30:29 by khirsig          ###   ########.fr       */
+/*   Created: 2022/03/07 15:18:08 by khirsig           #+#    #+#             */
+/*   Updated: 2022/03/07 15:56:31 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "initializer.h"
 
-void	initializer(t_data *data)
+void	init_minimap(t_data *data)
 {
-	init_window(data);
-	init_gameloop(data);
-	init_player(data);
-	init_npc(data);
-	init_inventory(data);
-	init_console(data);
-	init_minimap(data);
+	data->map.mini.len = data->window.height / 3.5;
+	data->map.mini.border = load_texture_len("./resources/interface/minimapborder.png", data->map.mini.len, data->map.mini.len);
+	data->map.mini.startX = data->window.width - data->map.mini.len * 1.2;
+	data->map.mini.startY = data->map.mini.len * 0.2;
 }

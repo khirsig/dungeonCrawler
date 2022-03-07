@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:54 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 23:36:27 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 15:18:12 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	init_inventory(t_data *data)
 {
 	double	calc = 568.0 / 379.0;
 
-	data->player.inv.gui.lenX = data->window.width / 4;
-	data->player.inv.gui.lenY = data->window.width / 4 * calc;
+	data->player.inv.gui.lenX = data->window.width / 5;
+	data->player.inv.gui.lenY = data->window.width / 5 * calc;
 	data->player.inv.gui.lenCell = data->player.inv.gui.lenX / 6;
 	data->player.inv.gui.posX = data->window.width / 2 - (data->player.inv.gui.lenX / 2);
 	data->player.inv.gui.posY = data->window.width / 4 - (data->player.inv.gui.lenY / 2);

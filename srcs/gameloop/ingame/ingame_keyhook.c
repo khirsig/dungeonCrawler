@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 14:38:50 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:46:49 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,7 @@ void	ingame_keyhook(t_data *data)
 	if (data->console.status == 0)
 	{
 		ingame_player_movement(data);
-		ingame_player_movement_jump(data);
+		// ingame_player_movement_jump(data);
 		ingame_player_rotation(data);
 		ingame_player_actions(data);
 		inventory_open(data);

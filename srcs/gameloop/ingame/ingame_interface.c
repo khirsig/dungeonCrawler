@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:45:45 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 14:26:21 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 15:55:57 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,13 @@ static char	display_minimap_pos(t_data *data, double x, double y, double divider
 	int	div;
 
 	div = divider / 2;
-	x_temp = data->player.posX / 10 + ((x - (data->window.width - size / 2 - div)) / divider);
-	y_temp = data->player.posY / 10 + ((y - (size / 2 - div)) / divider);
+	x_temp = data->player.posX / 10 + ((x - (data->map.mini.startX + size / 2 - div)) / divider);
+	y_temp = data->player.posY / 10 + ((y - (data->map.mini.startY + size / 2 - div)) / divider);
 	if (x_temp >= 0 && y_temp >= 0 && x_temp < data->map.width && y_temp < data->map.height)
 		return (data->map.grid[(int)y_temp][(int)x_temp]);
 	else
 		return ('0');
 }
-
-// static void	display_npc(t_data *data)
-// {
-// 	int	index;
-
-// 	index = 0;
-// 	while (index < data->game.npc_count)
-// 	{
-
-// 		index++;
-// 	}
-// }
 
 static int	get_door_id(t_data *data, int x, int y)
 {
@@ -67,21 +55,21 @@ static void	display_minimap_door(t_data *data, double x, double y, double divide
 	double	y_length;
 
 	div = divider / 2;
-	x_og = data->player.posX / 10 + ((x - (data->window.width - size / 2 - div)) / divider);
+	x_og = data->player.posX / 10 + ((x - (data->map.mini.startX + size / 2 - div)) / divider);
 	x_temp = x_og;
 	sub = 0;
 	while (x_og == x_temp)
 	{
-		x_temp = data->player.posX / 10 + (((x - sub) - (data->window.width - size / 2 - div)) / divider);
+		x_temp = data->player.posX / 10 + (((x - sub) - (data->map.mini.startX + size / 2 - div)) / divider);
 		sub++;
 	}
 	x_og = x - sub + 2;
-	y_og = data->player.posY / 10 + ((y - (size / 2 - div)) / divider);
+	y_og = data->player.posY / 10 + ((y - (data->map.mini.startY + size / 2 - div)) / divider);
 	y_temp = y_og;
 	sub = 0;
 	while (y_og == y_temp)
 	{
-		y_temp = data->player.posY / 10 + (((y - sub) - (size / 2 - div)) / divider);
+		y_temp = data->player.posY / 10 + (((y - sub) - (data->map.mini.startY + size / 2 - div)) / divider);
 		sub++;
 	}
 	y_og = y - sub + 2;
@@ -110,24 +98,19 @@ static void display_minimap(t_data *data)
 	double divider;
 	char	pos;
 
-	if (data->window.height > data->window.width)
-		size = (data->window.width / 3);
-	else if (data->window.height != data->window.width)
-		size = (data->window.height / 3);
-	else
-		size = (data->window.height / 4);
-	divider = (int)(size / 8);
-	x_end = (int)data->window.width;
-	y_end = (int)size;
-	y_start = 0;
+	divider = (int)(data->map.mini.len / 8);
+	size = data->map.mini.len - divider / 3;
+	x_end = data->map.mini.startX + size;
+	y_start = data->map.mini.startY + divider / 3;
+	y_end = data->map.mini.startY + size;
 	while (y_start <= y_end)
 	{
-		x_start = data->window.width - size;
+		x_start = data->map.mini.startX + divider / 3;
 		while (x_start <= x_end)
 		{
 			pos = display_minimap_pos(data, x_start, y_start, divider, size);
 			if (pos == '1' || pos == '8' || pos == '9')
-				DrawPixel(x_start, y_start, DARKGRAY);
+				DrawPixel(x_start, y_start, BLACK);
 			if (pos == '-' || pos == '_' || pos == '[' || pos == ']')
 				display_minimap_door(data, x_start, y_start, divider, size, pos);
 			x_start++;
@@ -144,12 +127,13 @@ static void display_minimap(t_data *data)
 		temp = data->player.planeX;
 		x_rotate = data->player.planeX * cos(index) - data->player.planeY * sin(index);
 		y_rotate = temp * sin(index) + data->player.planeY * cos(index);
-		DrawLine(data->window.width - size / 2, size / 2, (data->window.width - size / 2)
-				+ x_rotate * (divider * 1.5f), (size / 2)
+		DrawLine(data->map.mini.startX + size / 2, data->map.mini.startY + size / 2, (data->map.mini.startX + size / 2)
+				+ x_rotate * (divider * 1.5f), (data->map.mini.startY + size / 2)
 				+ y_rotate * (divider * 1.5f), (Color){ 253, 253, 253, 50 });
 		index += 0.01;
 	}
-	DrawCircle(data->window.width - size / 2, size / 2, divider / 2 - divider / 5, BLUE);
+	DrawCircle(data->map.mini.startX + size / 2, data->map.mini.startY + size / 2, divider / 2 - divider / 5, BLUE);
+	DrawTexture(data->map.mini.border, data->map.mini.startX, data->map.mini.startY, WHITE);
 }
 
 static void	display_vitals(t_data *data)
