@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:45:45 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 19:27:23 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 19:34:06 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,9 @@ static void	display_minimap_door(t_data *data, double x, double y, double divide
 			{
 				if (((pos == '-' || pos == '_') && (x <= x_og + (int)(divider / 5 * 1) || x > x_og + (int)(divider - (divider / 5 * 1))))
 					|| ((pos == '[' || pos == ']') && (y <= y_og + (int)(divider / 5 * 1) || y > y_og + (int)(divider - (divider / 5 * 1)))))
-					// DrawPixel(x, y, PURPLE);
 					DrawRectangle(x, y, 1, 1, (Color){ 100, 42, 160, 200 });
 			}
 			else
-				// DrawPixel(x, y, PURPLE);
 				DrawRectangle(x, y, 1, 1, (Color){ 100, 42, 160, 200 });
 		}
 }
@@ -136,10 +134,10 @@ static void display_minimap(t_data *data)
 		y_rotate = temp * sin(index) + data->player.planeY * cos(index);
 		DrawLine(data->map.mini.startX + size / 2, data->map.mini.startY + size / 2, (data->map.mini.startX + size / 2)
 				+ x_rotate * (divider * 1.5f), (data->map.mini.startY + size / 2)
-				+ y_rotate * (divider * 1.5f), (Color){ 0, 50, 200, 100 });
+				+ y_rotate * (divider * 1.5f), (Color){ 170, 170, 170, 100 });
 		index += 0.01;
 	}
-	DrawCircle(data->map.mini.startX + size / 2, data->map.mini.startY + size / 2, divider / 4, (Color){ 0, 100, 240, 255 });
+	DrawCircle(data->map.mini.startX + size / 2, data->map.mini.startY + size / 2, divider / 4, (Color){ 220, 220, 220, 255 });
 	DrawTexture(data->map.mini.border, data->map.mini.startX, data->map.mini.startY, WHITE);
 }
 
