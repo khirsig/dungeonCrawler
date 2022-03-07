@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:39:41 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 14:02:32 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:32:13 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	init_player(t_data *data)
 {
 	set_start_point(data);
 	data->player.is_sprinting = 0;
+	data->player.is_moving = 0;
 	data->player.base_ms = 0.10;
 	data->player.max_health = 100.0000;
 	data->player.health = data->player.max_health;

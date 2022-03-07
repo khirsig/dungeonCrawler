@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:35:34 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 14:02:21 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:31:58 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_player {
 	int		soulgem;
 	int		rotate_left;
 	int		rotate_right;
+	int		is_moving;
 	int		is_sprinting;
 	int		is_jumping;
 }				t_player;

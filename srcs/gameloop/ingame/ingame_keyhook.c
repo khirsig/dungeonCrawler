@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 14:03:18 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:38:50 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,11 @@ static void	ingame_player_movement_sprint(t_data *data)
 		data->player.is_sprinting = 0;
 		data->player.base_ms = 0.10;
 	}
-	if (data->player.is_sprinting == 0 && data->player.stamina < data->player.max_stamina)
-		data->player.stamina += 0.15;
+	if ((data->player.is_sprinting == 0 || (data->player.is_sprinting == 1 && data->player.is_moving == 0)) && data->player.stamina < data->player.max_stamina)
+		data->player.stamina += 0.10;
 	if (data->player.stamina > data->player.max_stamina)
 		data->player.stamina = data->player.max_stamina;
-	if (data->player.is_sprinting == 1 && data->player.stamina > 0.99)
+	if (data->player.is_sprinting == 1  && data->player.is_moving == 1 && data->player.stamina > 0.99)
 		data->player.stamina -= 0.20;
 	if (data->player.is_sprinting == 1 && data->player.stamina <= 0.99)
 	{
@@ -178,6 +178,10 @@ static void	ingame_player_movement(t_data *data)
 	}
 	if (IsKeyPressed(KEY_SPACE))
 		data->player.is_jumping = 1;
+	if (IsKeyDown(KEY_W) || IsKeyDown(KEY_S) || IsKeyDown(KEY_A) || IsKeyDown(KEY_D))
+		data->player.is_moving = 1;
+	else
+		data->player.is_moving = 0;
 }
 
 static void	ingame_player_rotation(t_data *data)
