@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:45:45 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 16:17:57 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 16:30:06 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,16 +165,16 @@ static void	display_vitals(t_data *data)
 			if (y_start <= y_temp + ((y_end - y_temp) / 5) * 2.4)
 			{
 				if (x_start - x_temp <= ((x_end - x_temp) * perc_hp) / 100.00)
-					DrawPixel(x_start, y_start, (Color){ 255, 41, 55, 255 });
+					DrawRectangle(x_start, y_start, 1, 1, (Color){ 255, 41, 55, 170 });
 				else
-					DrawPixel(x_start, y_start, BLACK);
+					DrawRectangle(x_start, y_start, 1, 1, (Color){ 10, 10, 10, 170 });
 			}
 			if (y_start >= y_temp + ((y_end - y_temp) / 5) * 2.6)
 			{
 				if (x_start - x_temp <= ((x_end - x_temp) * perc_stam) / 100)
-					DrawPixel(x_start, y_start, LIME);
+					DrawRectangle(x_start, y_start, 1, 1, (Color){ 0, 200, 67, 170 });
 				else
-					DrawPixel(x_start, y_start, BLACK);
+					DrawRectangle(x_start, y_start, 1, 1, (Color){ 10, 10, 10, 170 });
 			}
 			x_start++;
 		}
@@ -183,7 +183,7 @@ static void	display_vitals(t_data *data)
 	DrawTexture(data->player.chLay.bg, data->player.chLay.startX, data->player.chLay.startY, WHITE);
 	DrawTexture(data->player.chLay.avatar, data->player.chLay.startX + data->player.chLay.lenX / 12, data->player.chLay.startY + data->player.chLay.lenY / 8, WHITE);
 	DrawTexture(data->player.chLay.circle, data->player.chLay.startX + data->player.chLay.lenX / 12, data->player.chLay.startY + data->player.chLay.lenY / 8, WHITE);
-	DrawTextEx(data->window.font, ft_itoa(data->player.level), (Vector2){ data->player.chLay.startX + data->player.chLay.lenX / 20, data->player.chLay.startY + data->player.chLay.lenY / 1.45 }, data->player.chLay.lenY / 10, 1.0, WHITE);
+	DrawTextEx(data->window.font, ft_itoa(data->player.level), (Vector2){ data->player.chLay.startX + data->player.chLay.lenX / 20 - (data->player.level / 10), data->player.chLay.startY + data->player.chLay.lenY / 1.45 }, data->player.chLay.lenY / 10, 1.0, RAYWHITE);
 	char temp[50];
 	sprintf(temp, "%i / %i", (int)data->player.health, (int)data->player.max_health);
 	DrawTextEx(data->window.font, temp, (Vector2){ x_temp + data->player.chLay.lenX / 5, y_temp + data->player.chLay.lenY / 16.0 }, data->player.chLay.lenY / 20, 1.0, RAYWHITE);
