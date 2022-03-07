@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 14:22:01 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 14:17:27 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 16:53:33 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,24 @@ static void	console_command(t_data *data, char *cmd)
 	if (TextIsEqual(split_cmd[0], "setlevel") && split_cmd[1] != NULL && ft_isdigit(split_cmd[1][0]) == 1)
 	{
 		data->player.level = ft_atoi(split_cmd[1]);
+		add_to_history(data, cmd);
+	}
+	if (TextIsEqual(split_cmd[0], "setmaxhp") && split_cmd[1] != NULL && ft_isdigit(split_cmd[1][0]) == 1)
+	{
+		double	temp = data->player.max_health;
+		data->player.max_health = ft_atoi(split_cmd[1]);
+		data->player.health += data->player.max_health - temp;
+		if (data->player.health < 0.0)
+			data->player.health = 0.0;
+		add_to_history(data, cmd);
+	}
+	if (TextIsEqual(split_cmd[0], "setmaxstam") && split_cmd[1] != NULL && ft_isdigit(split_cmd[1][0]) == 1)
+	{
+		double	temp = data->player.max_stamina;
+		data->player.max_stamina = ft_atoi(split_cmd[1]);
+		data->player.stamina += data->player.max_stamina - temp;
+		if (data->player.stamina < 0.0)
+			data->player.stamina = 0.0;
 		add_to_history(data, cmd);
 	}
 }
