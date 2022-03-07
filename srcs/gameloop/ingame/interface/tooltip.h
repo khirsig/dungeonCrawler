@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_minimap.c                                     :+:      :+:    :+:   */
+/*   tooltip.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 15:18:08 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 18:38:20 by khirsig          ###   ########.fr       */
+/*   Created: 2022/02/19 10:09:33 by khirsig           #+#    #+#             */
+/*   Updated: 2022/02/19 10:11:25 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "initializer.h"
+#ifndef TOOLTIP_H
+# define TOOLTIP_H
 
-void	init_minimap(t_data *data)
-{
-	data->map.mini.len = data->window.height / 3.5;
-	data->map.mini.border = load_texture_len("./resources/interface/minimap/minimapborder.png", data->map.mini.len, data->map.mini.len);
-	data->map.mini.startX = data->window.width - data->map.mini.len * 1.1;
-	data->map.mini.startY = data->map.mini.len * 0.1;
+typedef struct s_tooltip {
+	Texture	tex;
+	int		lenX;
+	int		lenY;
+	int		posX;
+	int		posY;
 }
+				t_tooltip;
+
+#endif
