@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 14:48:57 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:03:18 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,12 @@ static void	ingame_player_movement_sprint(t_data *data)
 	if (IsKeyPressed(KEY_LEFT_SHIFT))
 	{
 		data->player.is_sprinting = 1;
-		data->player.movementspeed = 0.16;
+		data->player.base_ms = 0.16;
 	}
 	if (IsKeyReleased(KEY_LEFT_SHIFT))
 	{
 		data->player.is_sprinting = 0;
-		data->player.movementspeed = 0.08;
+		data->player.base_ms = 0.10;
 	}
 	if (data->player.is_sprinting == 0 && data->player.stamina < data->player.max_stamina)
 		data->player.stamina += 0.15;
@@ -112,7 +112,7 @@ static void	ingame_player_movement_sprint(t_data *data)
 	if (data->player.is_sprinting == 1 && data->player.stamina <= 0.99)
 	{
 		data->player.is_sprinting = 0;
-		data->player.movementspeed = 0.08;
+		data->player.base_ms = 0.10;
 	}
 }
 static int	is_door_open(t_data *data, int x, int y)

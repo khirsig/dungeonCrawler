@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 13:03:17 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/19 02:05:20 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 12:46:45 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,6 @@ void	inventory_draw(t_data *data)
 	inventory_move(data);
 	DrawTexture(data->player.inv.gui.tex[0], data->player.inv.gui.posX, data->player.inv.gui.posY, WHITE);
 	int incr = data->player.inv.gui.lenCell;
-	DrawTextEx(data->window.font, get_currency_string(data, data->player.gold), (Vector2){ data->player.inv.gui.posX + data->player.inv.gui.lenX / 9 * 2, data->player.inv.gui.posY + data->player.inv.gui.lenY / 40 * 39 }, incr / 5, 1, GRAY);
-	DrawTextEx(data->window.font, get_currency_string(data, data->player.soulgem), (Vector2){ data->player.inv.gui.posX + data->player.inv.gui.lenX / 13 * 8, data->player.inv.gui.posY + data->player.inv.gui.lenY / 40 * 39 }, incr / 5, 1, GRAY);
 	int	y = 0;
 	while (y < 7)
 	{
@@ -143,4 +141,6 @@ void	inventory_draw(t_data *data)
 		}
 		y++;
 	}
+	DrawTextEx(data->window.font, get_currency_string(data, data->player.gold), (Vector2){ data->player.inv.gui.posX + data->player.inv.gui.lenX / 9 * 2, data->player.inv.gui.posY + data->player.inv.gui.lenY / 10 * 9.75 }, incr / 5, 1, GRAY);
+	DrawTextEx(data->window.font, get_currency_string(data, data->player.soulgem), (Vector2){ data->player.inv.gui.posX + data->player.inv.gui.lenX / 13 * 8, data->player.inv.gui.posY + data->player.inv.gui.lenY / 10 * 9.75 }, incr / 5, 1, GRAY);
 }

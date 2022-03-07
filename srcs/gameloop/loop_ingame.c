@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 13:28:54 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 14:28:47 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:02:50 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	loop_ingame(t_data *data)
 	else
 		data->npc[0].cycle = 0.00f;
 	data->window.fps = GetFPS();
-	data->player.movementspeed = 0.12 / data->window.fps * 100;
+	data->player.movementspeed = data->player.base_ms / data->window.fps * 100;
 	data->player.rotatespeed = 0.05 / data->window.fps * 100;
 	UpdateCamera(&data->player.camera);
 	BeginDrawing();

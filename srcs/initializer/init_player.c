@@ -6,11 +6,24 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:39:41 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 23:46:04 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:02:32 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "initializer.h"
+
+ static Texture load_texture_len(char *path, int lenX, int lenY)
+{
+	Image image;
+	Texture texture;
+	int		lenIcon;
+
+	image = LoadImage(path);
+	ImageResize(&image, lenX, lenY);
+	texture = LoadTextureFromImage(image);
+	UnloadImage(image);
+	return (texture);
+}
 
 static void set_start_point(t_data *data)
 {
@@ -55,6 +68,7 @@ void	init_player(t_data *data)
 {
 	set_start_point(data);
 	data->player.is_sprinting = 0;
+	data->player.base_ms = 0.10;
 	data->player.max_health = 100.0000;
 	data->player.health = data->player.max_health;
 	data->player.max_stamina = 100.00000;
@@ -65,4 +79,13 @@ void	init_player(t_data *data)
 	data->player.camera.fovy = SCREEN_FOV;
 	data->player.soulgem = 0;
 	data->player.gold = 0;
+	data->player.level = 1;
+	double	calc = 432.0 / 153.0;
+	data->player.chLay.lenX = data->window.width / 10 * calc;
+	data->player.chLay.lenY = data->window.width / 10;
+	data->player.chLay.bg = load_texture_len("./resources/interface/charoverlay.png", data->player.chLay.lenX, data->player.chLay.lenY);
+	data->player.chLay.circle = load_texture_len("./resources/interface/avatarcircle.png", data->player.chLay.lenY - data->player.chLay.lenY / 3.4, data->player.chLay.lenY - data->player.chLay.lenY / 3.4);
+	data->player.chLay.avatar = load_texture_len("./resources/interface/tempavatar.png", data->player.chLay.lenY - data->player.chLay.lenY / 3.4, data->player.chLay.lenY - data->player.chLay.lenY / 3.4);
+	data->player.chLay.startX = data->window.width / 50;
+	data->player.chLay.startY = data->window.height - data->window.height / 6;
 }

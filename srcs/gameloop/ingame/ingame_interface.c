@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:45:45 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/17 13:03:24 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 14:26:21 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,10 +165,10 @@ static void	display_vitals(t_data *data)
 
 	perc_hp = (100.0 * data->player.health) / data->player.max_health;
 	perc_stam = (100.0 * data->player.stamina) / data->player.max_stamina;
-	y_end = data->window.height - data->window.height / 26;
-	y_start = data->window.height - (data->window.height / 26 * 2);
-	x_start = data->window.width / 26;
-	x_end = x_start + data->window.width / 5;
+	y_end = data->player.chLay.startY + data->player.chLay.lenY / 1.6;
+	y_start = data->player.chLay.startY + data->player.chLay.lenY / 3;
+	x_start = data->player.chLay.startX + data->player.chLay.lenX / 3.1;
+	x_end = data->player.chLay.startX + data->player.chLay.lenX / 1.2;
 	y_temp = y_start;
 	x_temp = x_start;
 	while (y_start <= y_end)
@@ -176,24 +176,33 @@ static void	display_vitals(t_data *data)
 		x_start = x_temp;
 		while (x_start <= x_end)
 		{
-			if (y_start <= y_temp + ((y_end - y_temp) / 5) * 2)
+			if (y_start <= y_temp + ((y_end - y_temp) / 5) * 2.4)
 			{
 				if (x_start - x_temp <= ((x_end - x_temp) * perc_hp) / 100.00)
 					DrawPixel(x_start, y_start, (Color){ 255, 41, 55, 255 });
 				else
-					DrawPixel(x_start, y_start, DARKGRAY);
+					DrawPixel(x_start, y_start, BLACK);
 			}
-			if (y_start >= y_temp + ((y_end - y_temp) / 5) * 3)
+			if (y_start >= y_temp + ((y_end - y_temp) / 5) * 2.6)
 			{
 				if (x_start - x_temp <= ((x_end - x_temp) * perc_stam) / 100)
 					DrawPixel(x_start, y_start, LIME);
 				else
-					DrawPixel(x_start, y_start, DARKGRAY);
+					DrawPixel(x_start, y_start, BLACK);
 			}
 			x_start++;
 		}
 		y_start++;
 	}
+	DrawTexture(data->player.chLay.bg, data->player.chLay.startX, data->player.chLay.startY, WHITE);
+	DrawTexture(data->player.chLay.avatar, data->player.chLay.startX + data->player.chLay.lenX / 12, data->player.chLay.startY + data->player.chLay.lenY / 8, WHITE);
+	DrawTexture(data->player.chLay.circle, data->player.chLay.startX + data->player.chLay.lenX / 12, data->player.chLay.startY + data->player.chLay.lenY / 8, WHITE);
+	DrawTextEx(data->window.font, ft_itoa(data->player.level), (Vector2){ data->player.chLay.startX + data->player.chLay.lenX / 20, data->player.chLay.startY + data->player.chLay.lenY / 1.45 }, data->player.chLay.lenY / 10, 1.0, WHITE);
+	char temp[50];
+	sprintf(temp, "%i / %i", (int)data->player.health, (int)data->player.max_health);
+	DrawTextEx(data->window.font, temp, (Vector2){ x_temp + data->player.chLay.lenX / 5, y_temp + data->player.chLay.lenY / 16.0 }, data->player.chLay.lenY / 20, 1.0, RAYWHITE);
+	sprintf(temp, "%i / %i", (int)data->player.stamina, (int)data->player.max_stamina);
+	DrawTextEx(data->window.font, temp, (Vector2){ x_temp + data->player.chLay.lenX / 5, y_temp + data->player.chLay.lenY / 4.7 }, data->player.chLay.lenY / 20, 1.0, RAYWHITE);
 }
 
 static void	ingame_interface_debug(t_data *data)
@@ -221,6 +230,9 @@ static void	ingame_interface_debug(t_data *data)
 	DrawText(temp, 90, 75, 5, WHITE);
 	sprintf(temp, "%.2lf", data->player.planeZ);
 	DrawText(temp, 140, 75, 5, WHITE);
+	DrawText("MS:", 5, 95, 5, PURPLE);
+	sprintf(temp, "%.2lf", data->player.movementspeed);
+	DrawText(temp, 40, 95, 5, WHITE);
 }
 
 static void	display_cursor(t_data *data)
