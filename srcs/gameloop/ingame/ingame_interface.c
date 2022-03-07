@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:45:45 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 16:30:06 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 16:36:27 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static char	display_minimap_pos(t_data *data, double x, double y, double divider
 	y_temp = data->player.posY / 10 + ((y - (data->map.mini.startY + size / 2 - div)) / divider);
 	if (x_temp >= 0 && y_temp >= 0 && x_temp < data->map.width && y_temp < data->map.height)
 		return (data->map.grid[(int)y_temp][(int)x_temp]);
+	else if (x_temp < 0 || y_temp < 0 || x_temp >= data->map.width || y_temp >= data->map.height)
+		return ('1');
 	else
 		return ('0');
 }
