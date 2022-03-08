@@ -29,6 +29,7 @@ SRC =	srcs/main.c										\
 		srcs/gameloop/ingame/ingame_currency.c			\
 		srcs/gameloop/ingame/ingame_interface.c			\
 		srcs/gameloop/ingame/ingame_console.c			\
+		srcs/gameloop/ingame/ingame_weapon.c			\
 		srcs/parser/parser.c							\
 		srcs/parser/parser_map.c						\
 		srcs/parser/parser_map_length.c					\

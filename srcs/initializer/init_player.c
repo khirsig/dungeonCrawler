@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:39:41 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 19:38:01 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/08 00:53:23 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,7 @@ void	init_player(t_data *data)
 	data->player.chLay.avatar = load_texture_len("./resources/interface/AVATAR000.png", data->player.chLay.lenY - data->player.chLay.lenY / 3.4, data->player.chLay.lenY - data->player.chLay.lenY / 3.4);
 	data->player.chLay.startX = data->window.width * 0.02;
 	data->player.chLay.startY = data->window.height - data->player.chLay.lenY;
+	data->player.wep.model = LoadModel("./resources/models/katana.obj");
+	Texture tempT = load_texture("./resources/models/textures/tex000.png");
+	data->player.wep.model.materials[0].maps[MATERIAL_MAP_NORMAL].texture = tempT;
 }

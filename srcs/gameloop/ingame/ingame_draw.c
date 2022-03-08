@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:10:13 by khirsig           #+#    #+#             */
-/*   Updated: 2022/02/18 14:22:08 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/08 09:18:20 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,4 +148,5 @@ void	ingame_draw(t_data *data)
 	ingame_draw_door(data, div);
 	// if (data->game.npc_count >= 1)
 	// 	ingame_draw_npc(data, div);
+	// draw_weapon(data);
 }

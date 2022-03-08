@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:35:34 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 14:31:58 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/07 23:36:35 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define PLAYER_H
 
 #include "inventory.h"
+
+typedef struct s_weapon {
+	Model model;
+}				t_weapon;
 
 typedef struct s_charOverlay {
 	Texture	bg;
@@ -29,6 +33,7 @@ typedef struct s_player {
 	Camera	camera;
 	t_inventory inv;
 	t_charOverlay chLay;
+	t_weapon wep;
 	double	posX;
 	double	posY;
 	double	posZ;
