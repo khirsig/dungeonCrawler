@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 23:40:57 by khirsig           #+#    #+#             */
-/*   Updated: 2022/01/30 22:06:15 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/08 20:58:34 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 
 typedef struct s_game {
-	Texture	*wall;
+	Texture		*wall;
+	Rectangle	wall_rect;
 	int		npc_count;
 	int		state;
 	int		debugmode;

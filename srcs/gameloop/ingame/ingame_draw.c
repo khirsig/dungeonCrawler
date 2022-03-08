@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:10:13 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/08 09:18:20 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/08 21:02:58 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ static void	ingame_draw_door(t_data *data, double div)
 		{
 			fade = (Color){ 255 - min, 255 - min, 255 - min, 255 };
 			if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == '-')
-				DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10, data->map.door[index].z, data->map.door[index].y * 10 - 5 }, 10.0f, 10.0f, 0.0f, fade);
+				DrawCubeTextureRec(data->game.wall[2], data->game.wall_rect, (Vector3){ data->map.door[index].x * 10, data->map.door[index].z, data->map.door[index].y * 10 - 5 }, 10.0f, 10.0f, 0.0f, fade);
 			if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == '_')
-				DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10, data->map.door[index].z, data->map.door[index].y * 10 + 5 }, 10.0f, 10.0f, 0.0f, fade);
+				DrawCubeTextureRec(data->game.wall[2], data->game.wall_rect, (Vector3){ data->map.door[index].x * 10, data->map.door[index].z, data->map.door[index].y * 10 + 5 }, 10.0f, 10.0f, 0.0f, fade);
 			if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == ']')
-				DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10 + 5, data->map.door[index].z, data->map.door[index].y * 10 }, 0.0f, 10.0f, 10.0f, fade);
+				DrawCubeTextureRec(data->game.wall[2], data->game.wall_rect, (Vector3){ data->map.door[index].x * 10 + 5, data->map.door[index].z, data->map.door[index].y * 10 }, 0.0f, 10.0f, 10.0f, fade);
 			if (data->map.grid[data->map.door[index].y][data->map.door[index].x] == '[')
-				DrawCubeTexture(data->game.wall[2], (Vector3){ data->map.door[index].x * 10 - 5, data->map.door[index].z, data->map.door[index].y * 10 }, 0.0f, 10.0f, 10.0f, fade);
+				DrawCubeTextureRec(data->game.wall[2], data->game.wall_rect, (Vector3){ data->map.door[index].x * 10 - 5, data->map.door[index].z, data->map.door[index].y * 10 }, 0.0f, 10.0f, 10.0f, fade);
 		}
 		index++;
 	}
@@ -130,15 +130,15 @@ void	ingame_draw(t_data *data)
 			if (min <= 255)
 			{
 				if (data->map.grid[y][x] == '1')
-					DrawCubeTexture(data->game.wall[0], (Vector3){ x * 10, 0.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
+					DrawCubeTextureRec(data->game.wall[0], data->game.wall_rect, (Vector3){ x * 10, 0.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
 				else if (data->map.grid[y][x] == '8')
-					DrawCubeTexture(data->game.wall[1], (Vector3){ x * 10, 0.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
+					DrawCubeTextureRec(data->game.wall[1], data->game.wall_rect, (Vector3){ x * 10, 0.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
 				else if (data->map.grid[y][x] == '9')
-					DrawCubeTexture(data->game.wall[0], (Vector3){ x * 10, 0.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
+					DrawCubeTextureRec(data->game.wall[0], data->game.wall_rect, (Vector3){ x * 10, 0.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
 				else
 				{
-					DrawCubeTexture(data->game.wall[0], (Vector3){ x * 10, -10.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
-					DrawCubeTexture(data->game.wall[0], (Vector3){ x * 10, 10.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
+					DrawCubeTextureRec(data->game.wall[0], data->game.wall_rect, (Vector3){ x * 10, -10.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
+					DrawCubeTextureRec(data->game.wall[0], data->game.wall_rect, (Vector3){ x * 10, 10.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
 				}
 			}
 			x++;

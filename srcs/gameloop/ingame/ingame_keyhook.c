@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 14:46:49 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/08 21:03:52 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,23 +96,23 @@ static void	ingame_player_movement_sprint(t_data *data)
 	if (IsKeyPressed(KEY_LEFT_SHIFT))
 	{
 		data->player.is_sprinting = 1;
-		data->player.base_ms = 0.16;
+		data->player.movementspeed = 0.16;
 	}
 	if (IsKeyReleased(KEY_LEFT_SHIFT))
 	{
 		data->player.is_sprinting = 0;
-		data->player.base_ms = 0.10;
+		data->player.movementspeed = 0.08;
 	}
-	if ((data->player.is_sprinting == 0 || (data->player.is_sprinting == 1 && data->player.is_moving == 0)) && data->player.stamina < data->player.max_stamina)
-		data->player.stamina += 0.10;
+	if (data->player.is_sprinting == 0 && data->player.stamina < data->player.max_stamina)
+		data->player.stamina += 0.15;
 	if (data->player.stamina > data->player.max_stamina)
 		data->player.stamina = data->player.max_stamina;
-	if (data->player.is_sprinting == 1  && data->player.is_moving == 1 && data->player.stamina > 0.99)
+	if (data->player.is_sprinting == 1 && data->player.stamina > 0.99)
 		data->player.stamina -= 0.20;
 	if (data->player.is_sprinting == 1 && data->player.stamina <= 0.99)
 	{
 		data->player.is_sprinting = 0;
-		data->player.base_ms = 0.10;
+		data->player.movementspeed = 0.08;
 	}
 }
 static int	is_door_open(t_data *data, int x, int y)
@@ -178,10 +178,6 @@ static void	ingame_player_movement(t_data *data)
 	}
 	if (IsKeyPressed(KEY_SPACE))
 		data->player.is_jumping = 1;
-	if (IsKeyDown(KEY_W) || IsKeyDown(KEY_S) || IsKeyDown(KEY_A) || IsKeyDown(KEY_D))
-		data->player.is_moving = 1;
-	else
-		data->player.is_moving = 0;
 }
 
 static void	ingame_player_rotation(t_data *data)
@@ -211,7 +207,7 @@ void	ingame_keyhook(t_data *data)
 	if (data->console.status == 0)
 	{
 		ingame_player_movement(data);
-		// ingame_player_movement_jump(data);
+		ingame_player_movement_jump(data);
 		ingame_player_rotation(data);
 		ingame_player_actions(data);
 		inventory_open(data);
