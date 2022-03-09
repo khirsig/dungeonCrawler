@@ -35,13 +35,15 @@ SRC =	srcs/main.c										\
 		srcs/parser/parser_map_length.c					\
 		srcs/parser/parser_map_error.c					\
 
+HEADER = config.h										\
+
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	make --directory=./libft
 	$(CC) $(OBJECTS) $(LFLAGS) -o $(NAME) $(LIBPATH)
 
-$(OBJECTS): $(SRC)
+$(OBJECTS): $(SRC) $(HEADER)
 	$(CC) -c $(CFLAGS) $(SRC)
 	@rm -rf ./objs; mkdir ./objs
 	@mv *.o $(OBJDIR)

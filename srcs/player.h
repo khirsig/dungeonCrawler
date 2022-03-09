@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:35:34 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/07 23:36:35 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/09 13:09:08 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@
 #include "inventory.h"
 
 typedef struct s_weapon {
-	Model model;
+	Model			model;
+	ModelAnimation	*anim;
+	double			framecnt;
+	double			angle;
 }				t_weapon;
 
 typedef struct s_charOverlay {

@@ -6,11 +6,12 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:39:41 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/08 00:53:23 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/09 14:43:08 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "initializer.h"
+#include <raymath.h>
 
 static void set_start_point(t_data *data)
 {
@@ -76,7 +77,23 @@ void	init_player(t_data *data)
 	data->player.chLay.avatar = load_texture_len("./resources/interface/AVATAR000.png", data->player.chLay.lenY - data->player.chLay.lenY / 3.4, data->player.chLay.lenY - data->player.chLay.lenY / 3.4);
 	data->player.chLay.startX = data->window.width * 0.02;
 	data->player.chLay.startY = data->window.height - data->player.chLay.lenY;
-	data->player.wep.model = LoadModel("./resources/models/katana.obj");
-	Texture tempT = load_texture("./resources/models/textures/tex000.png");
-	data->player.wep.model.materials[0].maps[MATERIAL_MAP_NORMAL].texture = tempT;
+	printf("==================================MODEL=================================\n");
+	data->player.wep.model = LoadModel("./resources/models/katana.iqm");
+	data->player.wep.model.transform = MatrixRotateX(90);
+	unsigned int animCount = 6;
+	printf("==================================ANIM=================================\n");
+	data->player.wep.anim = LoadModelAnimations("./resources/models/katana.iqm", &animCount);
+	printf("==================================END=================================\n");
+	data->player.wep.framecnt = 260;
+	data->player.wep.angle = 0;
+	// printf("================================================ %i %i\n", data->player.wep.model.materialCount, data->player.wep.anim[0].frameCount);
+	data->player.wep.model.materialCount = 5;
+	Texture tempT = LoadTexture("./resources/models/textures/Material_baseColor.png");
+	data->player.wep.model.materials[0].maps[0].texture = tempT;
+	// tempT = LoadTexture("./resources/models/textures/t_phoenix_baseColor.png");
+	// data->player.wep.model.materials[0].maps[0].texture = tempT;
+	// tempT = LoadTexture("./resources/models/textures/v_hands_normal.png");
+	// data->player.wep.model.materials[2].maps[0].texture = tempT;
+	// tempT = LoadTexture("./resources/models/textures/Material_baseColor.png");
+	// data->player.wep.model.materials[3].maps[0].texture = tempT;
 }

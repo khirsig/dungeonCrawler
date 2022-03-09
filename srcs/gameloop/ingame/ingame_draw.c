@@ -6,7 +6,7 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 12:10:13 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/08 21:46:08 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/09 15:05:41 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ void	ingame_draw(t_data *data)
 			if (min <= 255)
 			{
 				if (data->map.grid[y][x] == '1')
-					// DrawCubeTextureRec(data->game.wall[0], data->game.wall_rect, (Vector3){ x * 10, 0.0f, y * 10 }, 10.0f, 10.0f, 10.0f, fade);
 					DrawModelEx(data->game.wall_model[0], (Vector3){ x * 10, 0.0f, y * 10 }, (Vector3){ 1, 0, 0}, 180, (Vector3){ 1.0, 1.0, 1.0}, fade);
 				else if (data->map.grid[y][x] == '8')
 					DrawModelEx(data->game.wall_model[1], (Vector3){ x * 10, 0.0f, y * 10 }, (Vector3){ 1, 0, 0}, 180, (Vector3){ 1.0, 1.0, 1.0}, fade);

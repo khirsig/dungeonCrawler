@@ -6,11 +6,12 @@
 /*   By: khirsig <khirsig@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 15:35:30 by khirsig           #+#    #+#             */
-/*   Updated: 2022/03/08 21:03:52 by khirsig          ###   ########.fr       */
+/*   Updated: 2022/03/09 10:26:46 by khirsig          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop_ingame.h"
+#include <raymath.h>
 
 static int	get_door(t_data *data, int x, int y)
 {
@@ -189,6 +190,7 @@ static void	ingame_player_rotation(t_data *data)
 		temp = data->player.planeX;
 		data->player.planeX = data->player.planeX * cos(data->player.rotatespeed) - data->player.planeY * sin(data->player.rotatespeed);
 		data->player.planeY = temp * sin(data->player.rotatespeed) + data->player.planeY * cos(data->player.rotatespeed);
+		data->player.wep.angle -= data->player.rotatespeed * RAD2DEG;
 		data->player.dirX = data->player.posX + data->player.planeX;
 		data->player.dirY = data->player.posY + data->player.planeY;
 	}
@@ -197,6 +199,7 @@ static void	ingame_player_rotation(t_data *data)
 		temp = data->player.planeX;
 		data->player.planeX = data->player.planeX * cos(-data->player.rotatespeed) - data->player.planeY * sin(-data->player.rotatespeed);
 		data->player.planeY = -temp * sin(data->player.rotatespeed) + data->player.planeY * cos(data->player.rotatespeed);
+		data->player.wep.angle += data->player.rotatespeed * RAD2DEG;
 		data->player.dirX = data->player.posX + data->player.planeX;
 		data->player.dirY = data->player.posY + data->player.planeY;
 	}
